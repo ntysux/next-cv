@@ -18,6 +18,20 @@ const outlineBlack = defineStyle({
   }
 });
 
+const unstyledGrayHoverWhite = defineStyle({
+  bg: 'none',
+  color: 'app.gray.dark',
+  rounded: 'full',
+  _hover: {color: 'white'}
+});
+
+const unstyledHoverBgBlack = defineStyle({
+  bg: 'none',
+  // color: 'app.gray.dark',
+  rounded: 'full',
+  _hover: {bg: 'app.black.light'}
+});
+
 export const buttonTheme = defineStyleConfig({
-  variants: { solidBlack, outlineBlack }
+  variants: {solidBlack, outlineBlack, unstyledGrayHoverWhite, unstyledHoverBgBlack}
 });
