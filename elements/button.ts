@@ -7,6 +7,7 @@ const solidBlack = defineStyle({
 });
 
 const outlineBlack = defineStyle({
+  bg: 'white',
   border: '2px',
   color: 'app.black.dark',
   borderColor: 'app.black.dark',
