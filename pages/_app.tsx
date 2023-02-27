@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { buttonTheme } from "@/elements/button";
 
 const theme = extendTheme({
   colors: {
@@ -10,10 +11,13 @@ const theme = extendTheme({
         light: '#68666B'
       },
       gray: {
-        dark: '88898C'
+        dark: '#88898C'
       },
       teal: '#5CF2E3'
     }
+  },
+  components: {
+    Button: buttonTheme
   }
 });
 
