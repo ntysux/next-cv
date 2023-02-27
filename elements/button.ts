@@ -27,11 +27,17 @@ const unstyledGrayHoverWhite = defineStyle({
 
 const unstyledHoverBgBlack = defineStyle({
   bg: 'none',
-  // color: 'app.gray.dark',
+  rounded: 'full',
+  _hover: {bg: 'app.black.light'}
+});
+
+const close = defineStyle({
+  color: 'white',
+  bg: 'rgba(104, 102, 107, 0.74)',
   rounded: 'full',
   _hover: {bg: 'app.black.light'}
 });
 
 export const buttonTheme = defineStyleConfig({
-  variants: {solidBlack, outlineBlack, unstyledGrayHoverWhite, unstyledHoverBgBlack}
+  variants: {solidBlack, outlineBlack, unstyledGrayHoverWhite, unstyledHoverBgBlack, close}
 });
