@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { buttonTheme } from "@/elements/button";
 import { inputTheme } from "@/elements/input";
+import { menuTheme } from "@/elements/menu";
 
 const theme = extendTheme({
   colors: {
@@ -19,7 +20,8 @@ const theme = extendTheme({
   },
   components: {
     Button: buttonTheme,
-    Input: inputTheme
+    Input: inputTheme,
+    Menu: menuTheme
   }
 });
 
