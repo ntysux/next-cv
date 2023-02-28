@@ -3,3 +3,11 @@
 * {
   font-family: Quicksand;
 }
+
+*:focus {
+  box-shadow: none !important;
+}
+
+*[data-focus] {
+  box-shadow: none !important;
+}
