@@ -15,6 +15,14 @@ const unstyledWhite = definePartsStyle({
   }
 });
 
+const unstyledBlackLight = definePartsStyle({
+  field: {
+    color: 'white',
+    rounded: 'full',
+    bg: 'app.black.light'
+  }
+});
+
 export const inputTheme = defineMultiStyleConfig({
-  variants: { unstyledWhite }
+  variants: {unstyledWhite, unstyledBlackLight}
 });
