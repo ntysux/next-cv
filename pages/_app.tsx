@@ -4,6 +4,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { buttonTheme } from "@/elements/button";
 import { inputTheme } from "@/elements/input";
 import { menuTheme } from "@/elements/menu";
+import { modalTheme } from "@/elements/modal";
 
 const theme = extendTheme({
   colors: {
@@ -21,7 +22,8 @@ const theme = extendTheme({
   components: {
     Button: buttonTheme,
     Input: inputTheme,
-    Menu: menuTheme
+    Menu: menuTheme,
+    Modal: modalTheme
   }
 });
 
