@@ -11,12 +11,18 @@ const baseStyle = definePartsStyle({
     rounded: 'sm'
   },
   item: {
+    rounded: 'sm',
+    fontSize: 'md',
     color: 'white',
     bg: 'app.black.dark',
     _hover: {bg: 'app.black.light'}
   },
   command: {
     fontSize: 'sm'
+  },
+  divider: {
+    my: 1
   }
 });
+
 export const menuTheme = defineMultiStyleConfig({ baseStyle });
