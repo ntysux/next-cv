@@ -51,6 +51,8 @@ const Reducer = (cv: Cv = initCv, action: Action) => {
       return cv
     case 'SET_COLOR':
       return {...cv, color: action.payload.color}
+    case 'RENAME':
+      return {...cv, name: action.payload.name}
     default:
       return cv
   }
