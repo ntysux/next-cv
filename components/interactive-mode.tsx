@@ -6,10 +6,10 @@ import { changeMode } from "@/redux/actions";
 
 export default function InteractiveMode() {
   const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.cv);
+  const { mode, color } = useSelector((state: RootState) => state.cv);
 
   function currentColor(mode: boolean) {
-    return mode ? '#5CF2E3' : 'white'
+    return mode ? color : 'white'
   }
 
   return (
