@@ -53,6 +53,8 @@ const Reducer = (cv: Cv = initCv, action: Action) => {
       return {...cv, color: action.payload.color}
     case 'RENAME':
       return {...cv, name: action.payload.name}
+    case 'CHANGE_MODE':
+      return {...cv, mode: action.payload.mode}
     default:
       return cv
   }
