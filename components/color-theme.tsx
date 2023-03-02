@@ -17,7 +17,7 @@ const Map = ({array, render}: Map) =>
 
 export default function ColorTheme() {
   const dispatch = useDispatch();
-  const cv = useSelector((state: RootState) => state.cv);
+  const { color } = useSelector((state: RootState) => state.cv);
 
   return (
     <>
@@ -27,7 +27,7 @@ export default function ColorTheme() {
             <C.IconButton
               aria-label='change color'
               variant='unstyledHoverBgBlack'
-              icon={<C.Box p={1} bg={cv.color} rounded='full'/>}
+              icon={<C.Box p={1} bg={color} rounded='full'/>}
               size='sm'
             />
           </C.PopoverTrigger>
