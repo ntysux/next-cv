@@ -8,21 +8,22 @@ interface BasicLayout {
   value: string
 }
 
-interface SimpleLayout {
-  value: string
-}
-
 interface Image {
   url: string,
   align: 'left' | 'right' | 'top'
 }
 
-interface Section {
+interface Layout {
   table?: TableLayout,
   basic?: BasicLayout,
-  simple?: SimpleLayout,
+  simple?: string,
   image?: Image,
   notes?: string
+}
+
+interface Section {
+  name: string,
+  chil: Layout[]
 }
 
 interface Cv {
