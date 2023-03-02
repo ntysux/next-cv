@@ -1,11 +1,14 @@
 import * as C from "@chakra-ui/react";
 import * as TB from "@tabler/icons-react";
 import { useRef } from "react";
+import { RootState } from '@/redux/store';
+import { useSelector } from 'react-redux';
 
 export default function SectionMenuOptions() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isOpen: isLayoutOpen, onToggle: onLayoutToggle } = C.useDisclosure();
   const { isOpen: isImageOpen, onToggle: onImageToggle } = C.useDisclosure();
+  const { color } = useSelector((state: RootState) => state.cv);
 
   return (
     <>
@@ -17,7 +20,7 @@ export default function SectionMenuOptions() {
                 as={C.IconButton}
                 aria-label='open actions'
                 variant='unstyledHoverBgBlack'
-                icon={<C.Box p={1} bg={isOpen ? 'app.teal' : 'app.black.dark'} rounded='full'/>}
+                icon={<C.Box p={1} bg={isOpen ? color : 'app.black.dark'} rounded='full'/>}
                 size='xs'
               />
               <C.MenuList mt={2}>
