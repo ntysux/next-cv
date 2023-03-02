@@ -1,12 +1,13 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { Provider } from 'react-redux';
-import store from '../redux/store';
+import { Provider } from "react-redux";
+import store from "../redux/store";
 import { buttonTheme } from "@/elements/button";
 import { inputTheme } from "@/elements/input";
 import { menuTheme } from "@/elements/menu";
 import { modalTheme } from "@/elements/modal";
+import { accordionTheme } from "@/elements/accordion";
 
 const theme = extendTheme({
   colors: {
@@ -25,7 +26,8 @@ const theme = extendTheme({
     Button: buttonTheme,
     Input: inputTheme,
     Menu: menuTheme,
-    Modal: modalTheme
+    Modal: modalTheme,
+    Accordion: accordionTheme
   }
 });
 
