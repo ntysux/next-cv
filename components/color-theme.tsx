@@ -1,6 +1,11 @@
 import * as C from "@chakra-ui/react";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { setColorTheme } from "@/redux/actions";
 
-const colors: string[] = ['#5CF2E3', '#B980F2', '#F28DBC'];
+const colors: string[] = [
+  '#5CF2E3', '#B980F2', '#F28DBC'
+];
 
 interface Map {
   array: string[],
@@ -11,6 +16,9 @@ const Map = ({array, render}: Map) =>
   <>{array.map((color, key) => render(color, key))}</>
 
 export default function ColorTheme() {
+  const dispatch = useDispatch();
+  const cv = useSelector((state: RootState) => state.cv);
+
   return (
     <>
       <C.Box>
@@ -19,9 +27,9 @@ export default function ColorTheme() {
             <C.IconButton
               aria-label='change color'
               variant='unstyledHoverBgBlack'
-              icon={<C.Box p={1} bg='app.teal' rounded='full'/>}
+              icon={<C.Box p={1} bg={cv.color} rounded='full'/>}
               size='sm'
-            />    
+            />
           </C.PopoverTrigger>
           <C.PopoverContent
             w='min'
@@ -33,6 +41,7 @@ export default function ColorTheme() {
               <Map array={colors} render={(color, key) =>
                 <C.IconButton
                   key={key}
+                  onClick={() => dispatch(setColorTheme(color))}
                   aria-label='color'
                   variant='unstyledHoverBgBlack'
                   icon={<C.Box p={2} bg={color} rounded='full' />}
