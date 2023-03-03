@@ -2,7 +2,7 @@ import * as C from "@chakra-ui/react";
 import * as TB from "@tabler/icons-react";
 import SectionMenuActions from "./section.menu-options";
 import { useDispatch } from 'react-redux';
-import { newSection } from "@/redux/actions";
+import { newSection, cancelSection } from "@/redux/actions";
 
 export default function SectionCreate() {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ export default function SectionCreate() {
               <C.IconButton
                 position='absolute'
                 right='0'
-                onClick={onClose}
+                onClick={() => {onClose(); dispatch(cancelSection())}}
                 aria-label='close section'
                 variant='close'
                 icon={<TB.IconX size='16px' strokeWidth='3' />}
