@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import SectionMenuActions from "./section.menu-options";
 
-export default function SectionView() {
+export default function SectionView({ value } : {value: { item: any, key: number}}) {
   const { isOpen, onOpen, onClose } = C.useDisclosure();
-  const { color, mode } = useSelector((state: RootState) => state.cv);
+  const { color, mode, section } = useSelector((state: RootState) => state.cv);
 
   return (
     <>
@@ -15,7 +15,7 @@ export default function SectionView() {
           {({ isExpanded }) => (
             <>
               <C.HStack>
-                <C.AccordionButton>Sec 1</C.AccordionButton>
+                <C.AccordionButton>{section[value.key].name}</C.AccordionButton>
                 <C.Box
                   onClick={() => mode && onOpen()}
                   cursor={mode ? 'pointer' : 'default'}
@@ -50,7 +50,7 @@ export default function SectionView() {
                 pl={3}
                 rounded='full'
               >
-                <C.Text fontSize='sm' color='white'>Untited</C.Text>
+                <C.Text fontSize='sm' color='white'>{section[value.key].name}</C.Text>
                 <SectionMenuActions />
               </C.HStack>
               <C.IconButton
