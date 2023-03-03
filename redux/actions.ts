@@ -1,3 +1,5 @@
+import { Section } from "./state.interface";
+
 // for main
 export const create = () => ({
   type: 'CREATE'
@@ -18,7 +20,7 @@ export const changeMode = (mode: boolean) => ({
   payload: {mode}
 });
 
-export const wrapperSectionCreate = (section: any) => ({
+export const wrapperSectionCreate = (section: Section) => ({
   type: 'WRAPPER_SECTION_CREATE',
   payload: {section}
 });
@@ -32,7 +34,6 @@ export const cancelBranchSection = () => ({
   type: 'CANCEL_BRANCH_SECTION'
 });
 
-export const renameBranchSection = (index: number, name: string) => ({
-  type: 'RENAME_BRANCH_SECTION',
-  payload: {index, name}
+export const renameBranchSection = (name: string) => ({
+  type: 'RENAME_BRANCH_SECTION'
 });
