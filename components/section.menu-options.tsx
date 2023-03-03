@@ -2,12 +2,14 @@ import * as C from "@chakra-ui/react";
 import * as TB from "@tabler/icons-react";
 import { useRef } from "react";
 import { RootState } from '@/redux/store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { renameBranchSection } from "@/redux/actions";
 
 export default function SectionMenuOptions() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { isOpen: isLayoutOpen, onToggle: onLayoutToggle } = C.useDisclosure();
   const { isOpen: isImageOpen, onToggle: onImageToggle } = C.useDisclosure();
+  const dispatch = useDispatch();
   const { color } = useSelector((state: RootState) => state.cv);
 
   return (
@@ -39,6 +41,7 @@ export default function SectionMenuOptions() {
                       type='text'
                       variant='unstyledBlackLight'
                       size='sm'
+                      onChange={e => dispatch(renameBranchSection(e.target.value))}
                     />
                   </C.HStack>
                 </C.MenuItem>
