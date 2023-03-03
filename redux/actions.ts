@@ -1,3 +1,4 @@
+// for main
 export const create = () => ({
   type: 'CREATE'
 });
@@ -17,10 +18,21 @@ export const changeMode = (mode: boolean) => ({
   payload: {mode}
 });
 
-export const newSection = () => ({
-  type: 'ADD_NEW_SECTION'
+export const wrapperSectionCreate = (section: any) => ({
+  type: 'WRAPPER_SECTION_CREATE',
+  payload: {section}
 });
 
-export const cancelSection = () => ({
-  type: 'CANCEL_SECTION'
+// for branch
+export const newBranchSection = () => ({
+  type: 'NEW_BRANCH_SECTION'
+});
+
+export const cancelBranchSection = () => ({
+  type: 'CANCEL_BRANCH_SECTION'
+});
+
+export const renameBranchSection = (index: number, name: string) => ({
+  type: 'RENAME_BRANCH_SECTION',
+  payload: {index, name}
 });
