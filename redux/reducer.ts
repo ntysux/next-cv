@@ -65,6 +65,13 @@ const Reducer = (cv: Cv = initCv, action: Action) => {
           {name: 'Untited'}
         ]
       }
+    case 'CANCEL_SECTION':
+      return {
+        ...cv,
+        section: [
+          ...cv.section.slice(0, cv.section.length - 1)
+        ]
+      }
     default:
       return cv
   }
