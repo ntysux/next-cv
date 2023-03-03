@@ -4,8 +4,8 @@ interface TableLayout {
 }
 
 interface BasicLayout {
-  name: string,
-  value: string
+  name?: string,
+  value?: string
 }
 
 interface Image {
@@ -23,7 +23,7 @@ interface Layout {
 
 interface Section {
   name: string,
-  chil: Layout[]
+  chil?: Layout[]
 }
 
 interface Cv {
@@ -31,7 +31,7 @@ interface Cv {
   color: string,
   mode: boolean,
   pin: number | null,
-  section?: Section[]
+  section: Section[]
 }
 
 interface Action {
@@ -43,7 +43,8 @@ const initCv: Cv = {
   name: 'Untited',
   color: '#5CF2E3',
   mode: false,
-  pin: null
+  pin: null,
+  section: []
 }
 
 const Reducer = (cv: Cv = initCv, action: Action) => {
@@ -56,6 +57,14 @@ const Reducer = (cv: Cv = initCv, action: Action) => {
       return {...cv, name: action.payload.name}
     case 'CHANGE_MODE':
       return {...cv, mode: action.payload.mode}
+    case 'ADD_NEW_SECTION':
+      return {
+        ...cv,
+        section: [
+          ...cv.section,
+          {name: 'Untited'}
+        ]
+      }
     default:
       return cv
   }
