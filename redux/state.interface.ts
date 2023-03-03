@@ -18,7 +18,7 @@ export interface Layout {
   notes?: string
 }
 export interface Section {
-  name: string,
+  name?: string,
   chil?: Layout[]
 }
 export interface Cv {
