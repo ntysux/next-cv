@@ -1,14 +1,17 @@
 import * as C from "@chakra-ui/react";
 import * as TB from "@tabler/icons-react";
 import SectionMenuActions from "./section.menu-options";
+import { useDispatch } from 'react-redux';
+import { newSection } from "@/redux/actions";
 
 export default function SectionCreate() {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = C.useDisclosure();
 
   return (
     <>
       <C.IconButton
-        onClick={onOpen}
+        onClick={() => {onOpen(); dispatch(newSection())}}
         aria-label='add section'
         variant='unstyledGrayHoverWhite'
         icon={<TB.IconPlus size='18px' strokeWidth='3' />}
@@ -44,7 +47,12 @@ export default function SectionCreate() {
           </C.ModalBody>
           <C.ModalFooter>
             <C.Center w='full'>
-              <C.Button size='sm' onClick={onClose} variant='solidBlack' w='2xs'>
+              <C.Button
+                size='sm'
+                onClick={onClose}
+                variant='solidBlack'
+                w='2xs'
+              >
                 Tạo
               </C.Button>
             </C.Center>
