@@ -20,8 +20,8 @@ export const changeMode = (mode: boolean) => ({
   payload: {mode}
 });
 
-export const wrapperSectionCreate = (section: Section) => ({
-  type: 'WRAPPER_SECTION_CREATE',
+export const mergeSectionCreate = (section: Section) => ({
+  type: 'MERGE_SECTION_CREATE',
   payload: {section}
 });
 

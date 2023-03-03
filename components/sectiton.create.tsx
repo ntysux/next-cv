@@ -2,7 +2,7 @@ import * as C from "@chakra-ui/react";
 import * as TB from "@tabler/icons-react";
 import SectionMenuActions from "./section.menu-options";
 import { useSelector, useDispatch } from 'react-redux';
-import { wrapperSectionCreate, newBranchSection, cancelBranchSection } from "@/redux/actions";
+import { mergeSectionCreate, newBranchSection, cancelBranchSection } from "@/redux/actions";
 import { RootState } from "@/redux/store";
 
 export default function SectionCreate() {
@@ -12,7 +12,7 @@ export default function SectionCreate() {
 
   function wrapper() {
     onClose();
-    dispatch(wrapperSectionCreate(section));
+    dispatch(mergeSectionCreate(section));
     dispatch(cancelBranchSection());
   }
 

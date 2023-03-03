@@ -18,7 +18,7 @@ const mainReducer = (cv: Cv = initCv, action: Action) => {
       return {...cv, name: action.payload.name}
     case 'CHANGE_MODE':
       return {...cv, mode: action.payload.mode}
-    case 'WRAPPER_SECTION_CREATE':
+    case 'MERGE_SECTION_CREATE':
       return {
         ...cv,
         section: [
