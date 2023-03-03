@@ -35,5 +35,6 @@ export const cancelBranchSection = () => ({
 });
 
 export const renameBranchSection = (name: string) => ({
-  type: 'RENAME_BRANCH_SECTION'
+  type: 'RENAME_BRANCH_SECTION',
+  payload: {name}
 });
