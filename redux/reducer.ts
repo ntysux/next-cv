@@ -1,43 +1,4 @@
-interface TableLayout {
-  th: string[],
-  td: any[]
-}
-
-interface BasicLayout {
-  name?: string,
-  value?: string
-}
-
-interface Image {
-  url: string,
-  align: 'left' | 'right' | 'top'
-}
-
-interface Layout {
-  table?: TableLayout,
-  basic?: BasicLayout,
-  simple?: string,
-  image?: Image,
-  notes?: string
-}
-
-interface Section {
-  name: string,
-  chil?: Layout[]
-}
-
-interface Cv {
-  name: string,
-  color: string,
-  mode: boolean,
-  pin: number | null,
-  section: Section[]
-}
-
-interface Action {
-  type: string,
-  payload?: any
-}
+import { Cv, Action } from "./state.interface";
 
 const initCv: Cv = {
   name: 'Untited',
@@ -47,7 +8,7 @@ const initCv: Cv = {
   section: []
 }
 
-const Reducer = (cv: Cv = initCv, action: Action) => {
+const mainReducer = (cv: Cv = initCv, action: Action) => {
   switch(action.type) {
     case 'CREATE':
       return cv
@@ -57,24 +18,17 @@ const Reducer = (cv: Cv = initCv, action: Action) => {
       return {...cv, name: action.payload.name}
     case 'CHANGE_MODE':
       return {...cv, mode: action.payload.mode}
-    case 'ADD_NEW_SECTION':
+    case 'WRAPPER_SECTION_CREATE':
       return {
         ...cv,
         section: [
           ...cv.section,
-          {name: 'Untited'}
+          action.payload.section
         ]
-      }
-    case 'CANCEL_SECTION':
-      return {
-        ...cv,
-        section: [
-          ...cv.section.slice(0, cv.section.length - 1)
-        ]
-      }
+      } 
     default:
       return cv
   }
 }
 
-export default Reducer;
+export default mainReducer;
