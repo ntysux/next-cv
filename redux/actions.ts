@@ -16,3 +16,7 @@ export const changeMode = (mode: boolean) => ({
   type: 'CHANGE_MODE',
   payload: {mode}
 });
+
+export const newSection = () => ({
+  type: 'ADD_NEW_SECTION'
+});
