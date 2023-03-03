@@ -1,8 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import Reducer from './reducer';
+import mainReducer from './reducer';
+import branchReducer from './reducer.branch';
 
 const reducer = combineReducers({
-  cv: Reducer
+  cv: mainReducer,
+  section: branchReducer
 });
 
 export type RootState = ReturnType<typeof reducer>;
