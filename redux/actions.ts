@@ -20,3 +20,7 @@ export const changeMode = (mode: boolean) => ({
 export const newSection = () => ({
   type: 'ADD_NEW_SECTION'
 });
+
+export const cancelSection = () => ({
+  type: 'CANCEL_SECTION'
+});
