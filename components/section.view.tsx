@@ -70,7 +70,7 @@ export default function SectionView({ value } : {value: { item: any, key: number
           <C.ModalFooter>
             <C.Center w='full'>
               <C.Button size='sm' onClick={onClose} variant='solidBlack' w='2xs'>
-                Tạo
+                Lưu
               </C.Button>
             </C.Center>
           </C.ModalFooter>
