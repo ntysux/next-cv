@@ -36,7 +36,7 @@ export default function SectionCreate() {
                 pl={3}
                 rounded='full'
               >
-                <C.Text fontSize='sm' color='white'>Untited</C.Text>
+                <C.Text fontSize='sm' color='white'>{section.name}</C.Text>
                 <SectionMenuActions />
               </C.HStack>
               <C.IconButton
