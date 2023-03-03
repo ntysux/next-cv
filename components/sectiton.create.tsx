@@ -1,17 +1,25 @@
 import * as C from "@chakra-ui/react";
 import * as TB from "@tabler/icons-react";
 import SectionMenuActions from "./section.menu-options";
-import { useDispatch } from 'react-redux';
-import { newSection, cancelSection } from "@/redux/actions";
+import { useSelector, useDispatch } from 'react-redux';
+import { wrapperSectionCreate, newBranchSection, cancelBranchSection } from "@/redux/actions";
+import { RootState } from "@/redux/store";
 
 export default function SectionCreate() {
-  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = C.useDisclosure();
+  const section = useSelector((state: RootState) => state.section);
+  const dispatch = useDispatch();
+
+  function wrapper() {
+    onClose();
+    dispatch(wrapperSectionCreate(section));
+    dispatch(cancelBranchSection());
+  }
 
   return (
     <>
       <C.IconButton
-        onClick={() => {onOpen(); dispatch(newSection())}}
+        onClick={() => {onOpen(); dispatch(newBranchSection())}}
         aria-label='add section'
         variant='unstyledGrayHoverWhite'
         icon={<TB.IconPlus size='18px' strokeWidth='3' />}
@@ -34,7 +42,7 @@ export default function SectionCreate() {
               <C.IconButton
                 position='absolute'
                 right='0'
-                onClick={() => {onClose(); dispatch(cancelSection())}}
+                onClick={() => {onClose(); dispatch(cancelBranchSection())}}
                 aria-label='close section'
                 variant='close'
                 icon={<TB.IconX size='16px' strokeWidth='3' />}
@@ -48,9 +56,9 @@ export default function SectionCreate() {
           <C.ModalFooter>
             <C.Center w='full'>
               <C.Button
-                size='sm'
-                onClick={onClose}
+                onClick={wrapper}
                 variant='solidBlack'
+                size='sm'
                 w='2xs'
               >
                 Tạo
