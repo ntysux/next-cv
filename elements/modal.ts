@@ -20,7 +20,7 @@ const baseStyle = definePartsStyle({
   },
   body: {
     p: 2,
-    minH: '50vh'
+    minH: '60vh'
   },
   footer: {
     p: 2
