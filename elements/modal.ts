@@ -9,7 +9,8 @@ const baseStyle = definePartsStyle({
   },
   dialog: {
     mx: 2,
-    rounded: '2xl'
+    rounded: '2xl',
+    boxShadow: 'none'
   },
   header: {
     py: 1,
@@ -18,6 +19,7 @@ const baseStyle = definePartsStyle({
     roundedTop: '2xl',
   },
   body: {
+    p: 2,
     minH: '50vh'
   },
   footer: {
