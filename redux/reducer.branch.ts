@@ -16,7 +16,7 @@ const branchReducer = (section = initSection, action: Action) => {
         ...section,
         chil: [
           ...section.chil,
-          {note: action.payload.value}
+          {note: ''}
         ]
       }
     default:

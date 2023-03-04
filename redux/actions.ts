@@ -35,6 +35,6 @@ export const renameBranchSection = (name: string) => ({
   payload: {name}
 });
 
-export const addNoteBranchSection = (value: string) => ({
+export const addNoteBranchSection = () => ({
   type: 'ADD_NOTE_BRANCH_SECTION'
 });
