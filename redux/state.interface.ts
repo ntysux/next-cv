@@ -18,8 +18,8 @@ export interface Layout {
   note?: string
 }
 export interface Section {
-  name?: string,
-  chil?: Layout[]
+  name: string,
+  chil: Layout[]
 }
 export interface Cv {
   name: string,
