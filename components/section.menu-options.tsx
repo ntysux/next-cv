@@ -3,7 +3,7 @@ import * as TB from "@tabler/icons-react";
 import { useRef } from "react";
 import { RootState } from '@/redux/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { renameBranchSection } from "@/redux/actions";
+import { addNoteBranchSection, renameBranchSection } from "@/redux/actions";
 
 export default function SectionMenuOptions() {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,7 +47,10 @@ export default function SectionMenuOptions() {
                 </C.MenuItem>
                 <C.MenuDivider />
                 {/* Note */}
-                <C.MenuItem icon={<TB.IconNote size='18px' />}>
+                <C.MenuItem
+                  icon={<TB.IconNote size='18px' />}
+                  onClick={() => dispatch(addNoteBranchSection())}
+                >
                   Ghi chú
                 </C.MenuItem>
                 <C.MenuDivider />
