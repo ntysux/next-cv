@@ -19,6 +19,15 @@ const branchReducer = (section = initSection, action: Action) => {
           {note: ''}
         ]
       }
+    case 'SET_NOTE_VALUE_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil.slice(0, action.payload.index),
+          {note: action.payload.value},
+          ...section.chil.slice(action.payload.index + 1)
+        ]
+      }
     case 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION':
       return {
         ...section,
