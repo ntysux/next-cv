@@ -31,7 +31,7 @@ const unstyledHoverBgBlack = defineStyle({
   _hover: {bg: 'app.black.light'}
 });
 
-const closeModal = defineStyle({
+const closeDialog = defineStyle({
   color: 'white',
   bg: 'rgba(104, 102, 107, 0.74)',
   rounded: 'full',
@@ -51,7 +51,7 @@ export const buttonTheme = defineStyleConfig({
     outlineBlack,
     unstyledGrayHoverWhite,
     unstyledHoverBgBlack,
-    closeModal,
+    closeDialog,
     close
   }
 });
