@@ -38,3 +38,8 @@ export const renameBranchSection = (name: string) => ({
 export const addNoteBranchSection = () => ({
   type: 'ADD_NOTE_BRANCH_SECTION'
 });
+
+export const removeLayoutItemBranchSection = (index: number) => ({
+  type: 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION',
+  payload: {index}
+});
