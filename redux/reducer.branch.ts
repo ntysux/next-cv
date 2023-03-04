@@ -1,13 +1,24 @@
 import { Action, Section } from "./state.interface";
 
-const branchReducer = (section: Section = {}, action: Action) => {
+const initSection: Section = {
+  name: 'Untited',
+  chil: []
+}
+
+const branchReducer = (section = initSection, action: Action) => {
   switch(action.type) {
-    case 'NEW_BRANCH_SECTION':
-      return {name: 'Untited'}
     case 'CANCEL_BRANCH_SECTION':
-      return {}
+      return initSection
     case 'RENAME_BRANCH_SECTION':
       return {...section, name: action.payload.name}
+    case 'ADD_NOTE_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil,
+          {note: action.payload.value}
+        ]
+      }
     default:
       return section
   }
