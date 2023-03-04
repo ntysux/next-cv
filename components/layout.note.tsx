@@ -1,14 +1,11 @@
 import { HStack, Textarea } from "@chakra-ui/react";
-import { CloseButton } from "./closebutton";
 
-export default function Note(props: {isEdit?: boolean}) {
-  const { isEdit = true } = props;
-  
+export default function Note({ children }: {children?: JSX.Element}) {
   return (
     <>
       <HStack>
         <Textarea variant='filledGray' />
-        { isEdit && <CloseButton /> }
+        {children}
       </HStack>
     </>
   );
