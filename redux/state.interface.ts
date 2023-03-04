@@ -15,7 +15,7 @@ export interface Layout {
   basic?: BasicLayout,
   simple?: string,
   image?: Image,
-  notes?: string
+  note?: string
 }
 export interface Section {
   name?: string,
