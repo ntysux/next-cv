@@ -50,7 +50,7 @@ export default function SectionCreate() {
                 <C.Box key={key}>
                   {
                     typeof item.note === 'string' &&
-                    <Note>
+                    <Note index={key}>
                       <CloseButton onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
                     </Note>
                   }
