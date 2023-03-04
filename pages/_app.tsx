@@ -8,6 +8,7 @@ import { inputTheme } from "@/elements/input";
 import { menuTheme } from "@/elements/menu";
 import { modalTheme } from "@/elements/modal";
 import { accordionTheme } from "@/elements/accordion";
+import { textareaTheme } from "@/elements/textarea";
 
 const theme = extendTheme({
   colors: {
@@ -17,7 +18,10 @@ const theme = extendTheme({
         light: '#68666B'
       },
       gray: {
-        dark: '#88898C'
+        dark: '#88898C',
+        light1: '#D9D9D9',
+        light2: '#E0E0E0',
+        light3: '#EBEBEB'
       },
       teal: '#5CF2E3'
     }
@@ -27,7 +31,8 @@ const theme = extendTheme({
     Input: inputTheme,
     Menu: menuTheme,
     Modal: modalTheme,
-    Accordion: accordionTheme
+    Accordion: accordionTheme,
+    Textarea: textareaTheme
   }
 });
 
