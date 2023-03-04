@@ -2,10 +2,10 @@ import * as C from "@chakra-ui/react";
 import * as TB from "@tabler/icons-react";
 import SectionMenuActions from "./section.menu-options";
 import { useSelector, useDispatch } from 'react-redux';
-import { mergeSectionCreate, cancelBranchSection } from "@/redux/actions";
+import { mergeSectionCreate, cancelBranchSection, removeLayoutItemBranchSection } from "@/redux/actions";
 import { RootState } from "@/redux/store";
 import Note from "./layout.note";
-import { ModalCloseButton } from "./closebutton";
+import { CloseButton, ModalCloseButton } from "./closebutton";
 
 export default function SectionCreate() {
   const { isOpen, onOpen, onClose } = C.useDisclosure();
@@ -47,9 +47,14 @@ export default function SectionCreate() {
           <C.ModalBody>
             {
               section.chil.map((item: any, key: number) => 
-                <C.Stack key={key}>
-                  {item.note === '' && <Note />}
-                </C.Stack>
+                <C.Box key={key}>
+                  {
+                    typeof item.note === 'string' &&
+                    <Note>
+                      <CloseButton onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
+                    </Note>
+                  }
+                </C.Box>
               )
             }
           </C.ModalBody>
