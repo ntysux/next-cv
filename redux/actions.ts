@@ -39,6 +39,11 @@ export const addNoteBranchSection = () => ({
   type: 'ADD_NOTE_BRANCH_SECTION'
 });
 
+export const setNoteValueBranchSection = (index: number, value: string) => ({
+  type: 'SET_NOTE_VALUE_BRANCH_SECTION',
+  payload: {index, value}
+});
+
 export const removeLayoutItemBranchSection = (index: number) => ({
   type: 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION',
   payload: {index}
