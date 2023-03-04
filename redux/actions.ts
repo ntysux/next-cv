@@ -26,10 +26,6 @@ export const mergeSectionCreate = (section: Section) => ({
 });
 
 // for branch
-export const newBranchSection = () => ({
-  type: 'NEW_BRANCH_SECTION'
-});
-
 export const cancelBranchSection = () => ({
   type: 'CANCEL_BRANCH_SECTION'
 });
@@ -37,4 +33,8 @@ export const cancelBranchSection = () => ({
 export const renameBranchSection = (name: string) => ({
   type: 'RENAME_BRANCH_SECTION',
   payload: {name}
+});
+
+export const addNoteBranchSection = (value: string) => ({
+  type: 'ADD_NOTE_BRANCH_SECTION'
 });
