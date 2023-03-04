@@ -2,15 +2,17 @@ import * as C from "@chakra-ui/react";
 import * as TB from "@tabler/icons-react";
 import SectionMenuActions from "./section.menu-options";
 import { useSelector, useDispatch } from 'react-redux';
-import { mergeSectionCreate, newBranchSection, cancelBranchSection } from "@/redux/actions";
+import { mergeSectionCreate, cancelBranchSection } from "@/redux/actions";
 import { RootState } from "@/redux/store";
+import Note from "./layout.note";
+import { ModalCloseButton } from "./closebutton";
 
 export default function SectionCreate() {
   const { isOpen, onOpen, onClose } = C.useDisclosure();
   const section = useSelector((state: RootState) => state.section);
   const dispatch = useDispatch();
 
-  function wrapper() {
+  function merge() {
     onClose();
     dispatch(mergeSectionCreate(section));
     dispatch(cancelBranchSection());
@@ -19,13 +21,13 @@ export default function SectionCreate() {
   return (
     <>
       <C.IconButton
-        onClick={() => {onOpen(); dispatch(newBranchSection())}}
+        onClick={onOpen}
         aria-label='add section'
         variant='unstyledGrayHoverWhite'
         icon={<TB.IconPlus size='18px' strokeWidth='3' />}
         size='sm'
       />
-      <C.Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
+      <C.Modal scrollBehavior='inside' isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
         <C.ModalOverlay />
         <C.ModalContent maxW='container.lg'>
           <C.ModalHeader>
@@ -39,24 +41,22 @@ export default function SectionCreate() {
                 <C.Text fontSize='sm' color='white'>{section.name}</C.Text>
                 <SectionMenuActions />
               </C.HStack>
-              <C.IconButton
-                position='absolute'
-                right='0'
-                onClick={() => {onClose(); dispatch(cancelBranchSection())}}
-                aria-label='close section'
-                variant='close'
-                icon={<TB.IconX size='16px' strokeWidth='3' />}
-                size='xs'
-              />
+              <ModalCloseButton onClick={() => {onClose(); dispatch(cancelBranchSection())}} />
             </C.Center>
           </C.ModalHeader>
           <C.ModalBody>
-
+            {
+              section.chil.map((item: any, key: number) => 
+                <C.Stack key={key}>
+                  {item.note === '' && <Note />}
+                </C.Stack>
+              )
+            }
           </C.ModalBody>
           <C.ModalFooter>
             <C.Center w='full'>
               <C.Button
-                onClick={wrapper}
+                onClick={merge}
                 variant='solidBlack'
                 size='sm'
                 w='2xs'
