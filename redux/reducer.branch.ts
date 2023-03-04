@@ -19,6 +19,14 @@ const branchReducer = (section = initSection, action: Action) => {
           {note: ''}
         ]
       }
+    case 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil.slice(0, action.payload.index),
+          ...section.chil.slice(action.payload.index + 1)
+        ]
+      }
     default:
       return section
   }
