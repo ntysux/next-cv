@@ -3,7 +3,7 @@ import { IconBorderLeft, IconBorderRight, IconBorderTop, IconChevronRight, IconL
 import { useSelector, useDispatch } from "react-redux";
 import { ChangeEvent, useRef } from "react";
 import { RootState } from "@/redux/store";
-import { addNoteBranchSection, renameBranchSection } from "@/redux/actions";
+import { addImageBranchSection, addNoteBranchSection, renameBranchSection } from "@/redux/actions";
 
 export default function SectionMenuOptions() {
   const { isOpen: isLayoutOpen, onToggle: onLayoutToggle } = useDisclosure();
@@ -14,13 +14,15 @@ export default function SectionMenuOptions() {
   const { color } = useSelector((state: RootState) => state.cv);
   // focus input when click
   const handleClickFocusInput = () => inputRef.current?.focus();
-  // add note using redux action
+  // add Note using redux action
   const handleAddNote = () => dispatch(addNoteBranchSection());
   // rename section using redux action
   const handleRenameSection = (event: ChangeEvent) => {
     const input = event.target as HTMLInputElement;
     dispatch(renameBranchSection(input.value));
   }
+  // add Image using redux action
+  const handleAddImage = (align: string) => dispatch(addImageBranchSection(align));
 
   return (
     <>
@@ -110,9 +112,24 @@ export default function SectionMenuOptions() {
                 {/* Image options */}
                 <Collapse in={isImageOpen} animateOpacity>
                   <MenuGroup>
-                    <MenuItem icon={<IconBorderLeft color='#88898C' size='18px' />}>Bên trái</MenuItem>
-                    <MenuItem icon={<IconBorderRight color='#88898C' size='18px' />}>Bên phải</MenuItem>
-                    <MenuItem icon={<IconBorderTop color='#88898C' size='18px' />}>Bên trên</MenuItem>
+                    <MenuItem
+                      icon={<IconBorderLeft color='#88898C' size='18px' />}
+                      onClick={() => handleAddImage('left')}
+                    >
+                      Bên trái
+                    </MenuItem>
+                    <MenuItem
+                      icon={<IconBorderRight color='#88898C' size='18px' />}
+                      onClick={() => handleAddImage('right')}
+                    >
+                      Bên phải
+                    </MenuItem>
+                    <MenuItem
+                      icon={<IconBorderTop color='#88898C' size='18px' />}
+                      onClick={() => handleAddImage('top')}
+                    >
+                      Bên trên
+                    </MenuItem>
                   </MenuGroup>
                 </Collapse>
               </MenuList>
