@@ -1,34 +1,37 @@
-import * as C from "@chakra-ui/react";
+import { Container, Flex } from "@chakra-ui/react";
 import Dashboard from "@/components/dashboard";
 import SectionView from "@/components/section.view";
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { Section } from "@/redux/state.interface";
 
 export default function CvPage() {
+  // get sections current from redux state
   const { section } = useSelector((state: RootState) => state.cv);
 
   interface Map {
-    array: any[],
-    render: (color: string, key: number) => JSX.Element
+    array: Section[],
+    render: (item: Section, key: number) => JSX.Element
   }
   
+  // render all section of cv use render props
   const Map = ({array, render}: Map) =>
-    <>{array.map((color, key) => render(color, key))}</>
+    <>{array.map((section, key) => render(section, key))}</>
 
   return (
     <>
-      <C.Flex
+      <Flex
         minH='100vh'
         bgSize='17px 17px'
         bgGradient='radial(#88898C 8%, transparent 10%)'
       >
-        <C.Container maxW='container.lg'>
+        <Container maxW='container.lg'>
           <Dashboard />
-          <Map array={section} render={(item, key) => 
-            <SectionView key={key} value={{item, key}} />
+          <Map array={section} render={(section, key) => 
+            <SectionView key={key} value={{section, key}} />
           }/>
-        </C.Container>
-      </C.Flex>
+        </Container>
+      </Flex>
     </>
   );
 }

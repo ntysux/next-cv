@@ -1,22 +1,21 @@
-import * as C from "@chakra-ui/react";
+import { Button, Input, Modal, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 
 export default function Search() {
-  const { isOpen, onOpen, onClose } = C.useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <C.Button variant='outlineBlack' onClick={onOpen}>Tìm cv</C.Button>
-
-      <C.Modal isOpen={isOpen} onClose={onClose}>
-        <C.ModalOverlay />
-        <C.ModalContent>
-          <C.Input
+      <Button variant='outlineBlack' onClick={onOpen}>Tìm cv</Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <Input
             variant='unstyledWhite'
             type='text'
             placeholder='Tìm kiếm...'
           />
-        </C.ModalContent>
-      </C.Modal>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

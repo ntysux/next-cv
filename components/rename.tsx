@@ -1,19 +1,22 @@
-import * as C from "@chakra-ui/react";
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import { Editable, EditableInput, EditablePreview, Input } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import { rename } from "@/redux/actions";
 
 export default function Rename() {
   const dispatch = useDispatch();
+  // get name current
   const { name } = useSelector((state: RootState) => state.cv);
+  // rename using redux action
+  const renameCv = (nextValue: string) => dispatch(rename(nextValue));
 
   return (
     <>
-      <C.Editable
+      <Editable
         value={name}
-        onChange={nextValue => dispatch(rename(nextValue))}
+        onChange={renameCv}
       >
-        <C.EditablePreview
+        <EditablePreview
           noOfLines={1}
           maxW='100px'
           bg='app.black.light'
@@ -21,12 +24,12 @@ export default function Rename() {
           color='white'
           px='3'
         />
-        <C.Input
-          as={C.EditableInput}
+        <Input
+          as={EditableInput}
           variant='unstyledBlackLight'
           size='sm'
         />
-      </C.Editable>
+      </Editable>
     </>
   );
 }

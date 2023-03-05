@@ -1,125 +1,125 @@
-import * as C from "@chakra-ui/react";
-import * as TB from "@tabler/icons-react";
-import { useRef } from "react";
-import { RootState } from '@/redux/store';
-import { useSelector, useDispatch } from 'react-redux';
+import { Box, Center, Collapse, HStack, IconButton, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Spacer, Text, useDisclosure } from "@chakra-ui/react";
+import { IconBorderLeft, IconBorderRight, IconBorderTop, IconChevronRight, IconLayoutBoard, IconLayoutColumns, IconLayoutNavbar, IconNote, IconPencilMinus, IconPhoto, IconTable } from "@tabler/icons-react";
+import { useSelector, useDispatch } from "react-redux";
+import { ChangeEvent, useRef } from "react";
+import { RootState } from "@/redux/store";
 import { addNoteBranchSection, renameBranchSection } from "@/redux/actions";
 
 export default function SectionMenuOptions() {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { isOpen: isLayoutOpen, onToggle: onLayoutToggle } = C.useDisclosure();
-  const { isOpen: isImageOpen, onToggle: onImageToggle } = C.useDisclosure();
+  const { isOpen: isLayoutOpen, onToggle: onLayoutToggle } = useDisclosure();
+  const { isOpen: isImageOpen, onToggle: onImageToggle } = useDisclosure();
+  const inputRef = useRef<HTMLInputElement>(null); // rename input ref
   const dispatch = useDispatch();
+  // get current color
   const { color } = useSelector((state: RootState) => state.cv);
+  // focus input when click
+  const handleClickFocusInput = () => inputRef.current?.focus();
+  // add note using redux action
+  const handleAddNote = () => dispatch(addNoteBranchSection());
+  // rename section using redux action
+  const handleRenameSection = (event: ChangeEvent) => {
+    const input = event.target as HTMLInputElement;
+    dispatch(renameBranchSection(input.value));
+  }
 
   return (
     <>
-      <C.Center>
-        <C.Menu>
+      <Center>
+        <Menu>
           {({ isOpen }) => (
             <>
-              <C.MenuButton
-                as={C.IconButton}
+              <MenuButton
+                as={IconButton}
                 aria-label='open actions'
                 variant='unstyledHoverBgBlack'
-                icon={<C.Box p={1} bg={isOpen ? color : 'app.black.dark'} rounded='full'/>}
+                icon={<Box p={1} bg={isOpen ? color : 'app.black.dark'} rounded='full'/>}
                 size='xs'
               />
-              <C.MenuList mt={2}>
+              <MenuList mt={2}>
                 {/* Name */}
-                <C.MenuItem
+                <MenuItem
                   closeOnSelect={false}
-                  icon={<TB.IconPencilMinus size='18px' />}
+                  icon={<IconPencilMinus size='18px' />}
                   _hover={{bg:'none', cursor: 'text'}}
-                  onClick={() => inputRef.current?.focus()}
+                  onClick={handleClickFocusInput}
                 >
-                  <C.HStack>
-                    <C.Text>Tên</C.Text>
-                    <C.Spacer />
-                    <C.Input
+                  <HStack>
+                    <Text>Tên</Text>
+                    <Spacer />
+                    <Input
                       ref={inputRef}
                       type='text'
                       variant='unstyledBlackLight'
                       size='sm'
-                      onChange={e => dispatch(renameBranchSection(e.target.value))}
+                      onChange={e => handleRenameSection(e)}
                     />
-                  </C.HStack>
-                </C.MenuItem>
-                <C.MenuDivider />
+                  </HStack>
+                </MenuItem>
+                <MenuDivider />
                 {/* Note */}
-                <C.MenuItem
-                  icon={<TB.IconNote size='18px' />}
-                  onClick={() => dispatch(addNoteBranchSection())}
+                <MenuItem
+                  icon={<IconNote size='18px' />}
+                  onClick={handleAddNote}
                 >
                   Ghi chú
-                </C.MenuItem>
-                <C.MenuDivider />
+                </MenuItem>
+                <MenuDivider />
                 {/* Layout */}
-                <C.MenuItem
+                <MenuItem
                   closeOnSelect={false}
-                  icon={<TB.IconLayoutBoard size='18px' />}
+                  icon={<IconLayoutBoard size='18px' />}
                   onClick={onLayoutToggle}
                 >
-                  <C.HStack>
-                    <C.Text>Bố cục</C.Text>
-                    <C.Spacer />
-                    <C.Box
+                  <HStack>
+                    <Text>Bố cục</Text>
+                    <Spacer />
+                    <Box
                       transition='all 0.3s'
                       transform={isLayoutOpen ? 'rotate(90deg)' : 'rotate(0deg)'}
                     >
-                      <TB.IconChevronRight size='18px' strokeWidth='3' />
-                    </C.Box>
-                  </C.HStack>
-                </C.MenuItem>
-                <C.Collapse in={isLayoutOpen} animateOpacity>
-                  <C.MenuGroup>
-                    <C.MenuItem icon={<TB.IconTable color='#88898C' size='18px' />}>
-                      Bảng
-                    </C.MenuItem>
-                    <C.MenuItem icon={<TB.IconLayoutColumns color='#88898C' size='18px' />}>
-                      Cơ bản
-                    </C.MenuItem>
-                    <C.MenuItem icon={<TB.IconLayoutNavbar color='#88898C' size='18px' />}>
-                      Đơn giản
-                    </C.MenuItem>
-                  </C.MenuGroup>
-                </C.Collapse>
-                <C.MenuDivider />
+                      <IconChevronRight size='18px' strokeWidth='3' />
+                    </Box>
+                  </HStack>
+                </MenuItem>
+                {/* Layout options */}
+                <Collapse in={isLayoutOpen} animateOpacity>
+                  <MenuGroup>
+                    <MenuItem icon={<IconTable color='#88898C' size='18px' />}>Bảng</MenuItem>
+                    <MenuItem icon={<IconLayoutColumns color='#88898C' size='18px' />}>Cơ bản</MenuItem>
+                    <MenuItem icon={<IconLayoutNavbar color='#88898C' size='18px' />}>Đơn giản</MenuItem>
+                  </MenuGroup>
+                </Collapse>
+                <MenuDivider />
                 {/* Image */}
-                <C.MenuItem
+                <MenuItem
                   closeOnSelect={false}
-                  icon={<TB.IconPhoto size='18px' />}
+                  icon={<IconPhoto size='18px' />}
                   onClick={onImageToggle}
                 >
-                  <C.HStack>
-                    <C.Text>Ảnh</C.Text>
-                    <C.Spacer />
-                    <C.Box
+                  <HStack>
+                    <Text>Ảnh</Text>
+                    <Spacer />
+                    <Box
                       transition='all 0.3s'
                       transform={isImageOpen ? 'rotate(90deg)' : 'rotate(0deg)'}
                     >
-                      <TB.IconChevronRight size='18px' strokeWidth='3' />
-                    </C.Box>
-                  </C.HStack>
-                </C.MenuItem>
-                <C.Collapse in={isImageOpen} animateOpacity>
-                  <C.MenuGroup>
-                    <C.MenuItem icon={<TB.IconBorderLeft color='#88898C' size='18px' />}>
-                      Bên trái
-                    </C.MenuItem>
-                    <C.MenuItem icon={<TB.IconBorderRight color='#88898C' size='18px' />}>
-                      Bên phải
-                    </C.MenuItem>
-                    <C.MenuItem icon={<TB.IconBorderTop color='#88898C' size='18px' />}>
-                      Bên trên
-                    </C.MenuItem>
-                  </C.MenuGroup>
-                </C.Collapse>
-              </C.MenuList>
+                      <IconChevronRight size='18px' strokeWidth='3' />
+                    </Box>
+                  </HStack>
+                </MenuItem>
+                {/* Image options */}
+                <Collapse in={isImageOpen} animateOpacity>
+                  <MenuGroup>
+                    <MenuItem icon={<IconBorderLeft color='#88898C' size='18px' />}>Bên trái</MenuItem>
+                    <MenuItem icon={<IconBorderRight color='#88898C' size='18px' />}>Bên phải</MenuItem>
+                    <MenuItem icon={<IconBorderTop color='#88898C' size='18px' />}>Bên trên</MenuItem>
+                  </MenuGroup>
+                </Collapse>
+              </MenuList>
             </>
           )}
-        </C.Menu>
-      </C.Center>
+        </Menu>
+      </Center>
     </>
   );
 }

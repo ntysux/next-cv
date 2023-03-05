@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { mergeSectionCreate, cancelBranchSection, removeLayoutItemBranchSection } from "@/redux/actions";
 import { RootState } from "@/redux/store";
 import Note from "./layout.note";
-import { CloseButton, ModalCloseButton } from "./closebutton";
+import { CloseButton, DialogCloseButton } from "./closebutton";
 
 export default function SectionCreate() {
   const { isOpen, onOpen, onClose } = C.useDisclosure();
@@ -41,7 +41,7 @@ export default function SectionCreate() {
                 <C.Text fontSize='sm' color='white'>{section.name}</C.Text>
                 <SectionMenuActions />
               </C.HStack>
-              <ModalCloseButton onClick={() => {onClose(); dispatch(cancelBranchSection())}} />
+              <DialogCloseButton onClick={() => {onClose(); dispatch(cancelBranchSection())}} />
             </C.Center>
           </C.ModalHeader>
           <C.ModalBody>

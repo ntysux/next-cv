@@ -1,22 +1,24 @@
-import * as C from "@chakra-ui/react";
-import * as TB from "@tabler/icons-react";
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, Center, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
+import { IconX } from "@tabler/icons-react";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import SectionMenuActions from "./section.menu-options";
+import { Section } from "@/redux/state.interface";
 
-export default function SectionView({ value } : {value: { item: any, key: number}}) {
-  const { isOpen, onOpen, onClose } = C.useDisclosure();
+export default function SectionView({value}: {value: {section: Section, key: number}}) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  // get curren color, mode & section from redux state
   const { color, mode, section } = useSelector((state: RootState) => state.cv);
 
   return (
     <>
-      <C.Accordion defaultIndex={[0, 1]} allowMultiple>
-        <C.AccordionItem>
+      <Accordion defaultIndex={[0, 1]} allowMultiple>
+        <AccordionItem>
           {({ isExpanded }) => (
             <>
-              <C.HStack>
-                <C.AccordionButton>{section[value.key].name}</C.AccordionButton>
-                <C.Box
+              <HStack>
+                <AccordionButton>{section[value.key].name}</AccordionButton>
+                <Box
                   onClick={() => mode && onOpen()}
                   cursor={mode ? 'pointer' : 'default'}
                   p={mode ? 1 : 0.5}
@@ -27,55 +29,55 @@ export default function SectionView({ value } : {value: { item: any, key: number
                   bg={isExpanded ? color : 'white'}
                   borderColor={isExpanded ? color : 'app.gray.dark'}
                 />
-              </C.HStack>
-              <C.AccordionPanel>
+              </HStack>
+              <AccordionPanel>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                 veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
                 commodo consequat.
-              </C.AccordionPanel>
+              </AccordionPanel>
             </>
           )}
-        </C.AccordionItem>
-      </C.Accordion>
+        </AccordionItem>
+      </Accordion>
 
-      <C.Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
-        <C.ModalOverlay />
-        <C.ModalContent maxW='container.lg'>
-          <C.ModalHeader>
-            <C.Center position='relative'>
-              <C.HStack
+      <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
+        <ModalOverlay />
+        <ModalContent maxW='container.lg'>
+          <ModalHeader>
+            <Center position='relative'>
+              <HStack
                 bg='app.black.light'
                 p={1}
                 pl={3}
                 rounded='full'
               >
-                <C.Text fontSize='sm' color='white'>{section[value.key].name}</C.Text>
+                <Text fontSize='sm' color='white'>{section[value.key].name}</Text>
                 <SectionMenuActions />
-              </C.HStack>
-              <C.IconButton
+              </HStack>
+              <IconButton
                 position='absolute'
                 right='0'
                 onClick={onClose}
                 aria-label='close section'
                 variant='close'
-                icon={<TB.IconX size='16px' strokeWidth='3' />}
+                icon={<IconX size='16px' strokeWidth='3' />}
                 size='xs'
               />
-            </C.Center>
-          </C.ModalHeader>
-          <C.ModalBody>
+            </Center>
+          </ModalHeader>
+          <ModalBody>
 
-          </C.ModalBody>
-          <C.ModalFooter>
-            <C.Center w='full'>
-              <C.Button size='sm' onClick={onClose} variant='solidBlack' w='2xs'>
+          </ModalBody>
+          <ModalFooter>
+            <Center w='full'>
+              <Button size='sm' onClick={onClose} variant='solidBlack' w='2xs'>
                 Lưu
-              </C.Button>
-            </C.Center>
-          </C.ModalFooter>
-        </C.ModalContent>
-      </C.Modal>
+              </Button>
+            </Center>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

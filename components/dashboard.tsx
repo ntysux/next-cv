@@ -1,11 +1,11 @@
-import * as C from "@chakra-ui/react";
+import { Center, Divider, HStack } from "@chakra-ui/react";
 import Rename from "./rename";
 import ColorTheme from "./color-theme";
 import SectionCreate from "./sectiton.create";
 import InteractiveMode from "./interactive-mode";
 
-const Divider = () =>
-  <C.Divider
+const DividerDashboard = () =>
+  <Divider
     orientation='vertical'
     h='8px'
     borderColor='app.black.light'
@@ -14,26 +14,24 @@ const Divider = () =>
 
 export default function Dashboard() {
   return (
-    <>
-      <C.Center
-        position='sticky'
-        top='0'
-        p={2}
+    <Center
+      position='sticky'
+      top='0'
+      p={2}
+    >
+      <HStack
+        p={1}
+        rounded='full'
+        bg='app.black.dark'
       >
-        <C.HStack
-          p={1}
-          rounded='full'
-          bg='app.black.dark'
-        >
-          <Rename />
-          <Divider />
-          <InteractiveMode />
-          <Divider />
-          <ColorTheme />
-          <Divider />
-          <SectionCreate />
-        </C.HStack>
-      </C.Center>
-    </>
+        <Rename />
+        <DividerDashboard />
+        <InteractiveMode />
+        <DividerDashboard />
+        <ColorTheme />
+        <DividerDashboard />
+        <SectionCreate />
+      </HStack>
+    </Center>
   );
 }

@@ -1,46 +1,47 @@
-import * as C from "@chakra-ui/react";
-import * as TB from "@tabler/icons-react";
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import { Center, IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { IconEye, IconPencil } from "@tabler/icons-react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 import { changeMode } from "@/redux/actions";
 
 export default function InteractiveMode() {
   const dispatch = useDispatch();
+  // get current mode & color
   const { mode, color } = useSelector((state: RootState) => state.cv);
-
-  function currentColor(mode: boolean) {
-    return mode ? color : 'white'
-  }
+  // if mode has been activated -> return current color for this mode
+  const currentColor = (mode: boolean) => mode ? color : 'white';
+  const viewMode = () => dispatch(changeMode(false)); // set mode = view using redux action
+  const editMode = () => dispatch(changeMode(true)); // set mode = edit using redux action
 
   return (
     <>
-      <C.Center>
-        <C.Menu>
-          <C.MenuButton
-            as={C.IconButton}
+      <Center>
+        <Menu>
+          <MenuButton
+            as={IconButton}
             aria-label='set mode'
             variant='unstyledGrayHoverWhite'
-            icon={mode ? <TB.IconPencil size='20px' /> : <TB.IconEye size='20px' />}
+            icon={mode ? <IconPencil size='20px' /> : <IconEye size='20px' />}
             size='sm'
           />
-          <C.MenuList>
-            <C.MenuItem
-              icon={<TB.IconEye size='18px' color={currentColor(!mode)} />}
+          <MenuList>
+            <MenuItem
+              icon={<IconEye size='18px' color={currentColor(!mode)} />}
               command='Ctrl + V'
-              onClick={() => dispatch(changeMode(false))}
+              onClick={viewMode}
             >
               Chế độ xem
-            </C.MenuItem>
-            <C.MenuItem
-              icon={<TB.IconPencil size='18px' color={currentColor(mode)} />}
+            </MenuItem>
+            <MenuItem
+              icon={<IconPencil size='18px' color={currentColor(mode)} />}
               command='Ctrl + E'
-              onClick={() => dispatch(changeMode(true))}
+              onClick={editMode}
             >
               Chế độ chỉnh sửa
-            </C.MenuItem>
-          </C.MenuList>
-        </C.Menu>
-      </C.Center>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Center>
     </>
   );
 }
