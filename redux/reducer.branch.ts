@@ -36,6 +36,19 @@ const branchReducer = (section = initSection, action: Action) => {
           ...section.chil.slice(action.payload.index + 1)
         ]
       }
+    case 'ADD_IMAGE_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil,
+          { 
+            image: {
+              url: '',
+              align: action.payload.align
+            }
+          }
+        ]
+      }
     default:
       return section
   }
