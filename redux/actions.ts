@@ -48,3 +48,8 @@ export const removeLayoutItemBranchSection = (index: number) => ({
   type: 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION',
   payload: {index}
 });
+
+export const addImageBranchSection = (align: string) => ({
+  type: 'ADD_IMAGE_BRANCH_SECTION',
+  payload: {align}
+});
