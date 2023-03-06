@@ -16,7 +16,7 @@ export const DialogCloseButton = ({ onClick }: Props) =>
     icon={<IconX size='16px' strokeWidth='3' />}
   />
 
-export const CloseButton = ({ onClick }: Props) =>
+export const CloseButtonDefault = ({ onClick }: Props) =>
   <IconButton
     aria-label='close'
     variant='close'
