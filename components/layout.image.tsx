@@ -1,26 +1,32 @@
 import { Box, Center, Circle, FormControl, FormLabel, Image, Input } from "@chakra-ui/react";
 import { RootState } from "@/redux/store";
-import { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import { ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUrlImageBranchSection } from "@/redux/actions";
 
 interface Props {
   children?: JSX.Element,
-  isAvatar: boolean
+  isAvatar: boolean,
+  index: number
 }
 
-export default function ImageLayout({children, isAvatar}: Props) {
-  const [image, setImage] = useState('');
+export default function ImageLayout({children, isAvatar, index}: Props) {
+  const dispatch = useDispatch();
 
   // get color current from redux state
   const { color } = useSelector((state: RootState) => state.cv);
+  const { chil } = useSelector((state: RootState) => state.section);
 
   // show image after upload
   function handleChangeImage(event: ChangeEvent) {
     const input = event.target as HTMLInputElement;
     const file: FileList = input.files!;
     const imgUrl: string = URL.createObjectURL(file[0]);
-    setImage(imgUrl);
+    dispatch(setUrlImageBranchSection(index, imgUrl, isAvatar));
   }
+
+  const imgObj = chil[index];
+  const img = imgObj.type === 'image' ? imgObj.url : undefined;
 
   return isAvatar ? (
     <Center
@@ -38,10 +44,10 @@ export default function ImageLayout({children, isAvatar}: Props) {
             size='90px'
             cursor='pointer'
             overflow='hidden'
-            border={image ? '4px solid' : '2px dashed'}
+            border={img ? '4px solid' : '2px dashed'}
             borderColor={color}
           >
-            <Image src={image} />
+            <Image src={img} />
           </Circle>
         </FormLabel>
         <Input type='file' display='none' onChange={handleChangeImage} />
@@ -59,12 +65,12 @@ export default function ImageLayout({children, isAvatar}: Props) {
           maxH='160px'
           cursor='pointer'
           rounded='xl'
-          border={image ? '4px solid' : '2px dashed'}
+          border={img ? '4px solid' : '2px dashed'}
           borderColor={color}
           overflow='hidden'
         >
           <Image
-            src={image}
+            src={img}
           />
         </Center>
       </FormLabel>

@@ -46,6 +46,19 @@ const branchReducer = (section: Section = initSection, action: Action): Section 
           }
         ]
       }
+    case 'SET_URL_IMAGE_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil.slice(0, action.payload.index),
+          { 
+            type: 'image',
+            url: action.payload.url,
+            isAvatar: action.payload.isAvatar
+          },
+          ...section.chil.slice(action.payload.index + 1)
+        ]
+      }
     case 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION':
       return {
         ...section,

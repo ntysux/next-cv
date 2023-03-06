@@ -33,7 +33,7 @@ export default function LayoutEdit() {
           }
           {
             item.type === 'image' &&
-            <ImageLayout isAvatar={item.isAvatar}>
+            <ImageLayout index={key} isAvatar={item.isAvatar}>
               <CloseButtonDefault onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
             </ImageLayout>
           }
