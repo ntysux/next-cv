@@ -16,7 +16,10 @@ const branchReducer = (section = initSection, action: Action) => {
         ...section,
         chil: [
           ...section.chil,
-          {note: ''}
+          {
+            type: 'note',
+            value: ''
+          }
         ]
       }
     case 'SET_NOTE_VALUE_BRANCH_SECTION':
@@ -24,15 +27,10 @@ const branchReducer = (section = initSection, action: Action) => {
         ...section,
         chil: [
           ...section.chil.slice(0, action.payload.index),
-          {note: action.payload.value},
-          ...section.chil.slice(action.payload.index + 1)
-        ]
-      }
-    case 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION':
-      return {
-        ...section,
-        chil: [
-          ...section.chil.slice(0, action.payload.index),
+          {
+            type: 'note',
+            value: action.payload.value
+          },
           ...section.chil.slice(action.payload.index + 1)
         ]
       }
@@ -42,11 +40,18 @@ const branchReducer = (section = initSection, action: Action) => {
         chil: [
           ...section.chil,
           { 
-            image: {
-              url: '',
-              align: action.payload.align
-            }
+            type: 'image',
+            url: '',
+            align: action.payload.align
           }
+        ]
+      }
+    case 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil.slice(0, action.payload.index),
+          ...section.chil.slice(action.payload.index + 1)
         ]
       }
     default:
