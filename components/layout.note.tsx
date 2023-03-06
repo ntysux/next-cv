@@ -9,22 +9,24 @@ interface Props {
   index: number
 }
 
-export default function Note({ children, index }: Props) {
+export default function NoteLayout({ children, index }: Props) {
   const dispatch = useDispatch();
   // get redux state: branch section
-  const section = useSelector((state: RootState) => state.section);
+  const { chil } = useSelector((state: RootState) => state.section);
   // handle set note value with redux action
   const handleSetNoteValue = (event: ChangeEvent) => {
     const textarea = event.target as HTMLTextAreaElement;
     dispatch(setNoteValueBranchSection(index, textarea.value));
   }
 
+  const noteObj = chil[index];
+
   return (
     <>
       <HStack>
         <Textarea
           variant='filledGray'
-          value={section.chil[index].note}
+          value={noteObj.type === 'note' ? noteObj.value : undefined}
           onChange={e => handleSetNoteValue(e)} 
         />
         {children}
