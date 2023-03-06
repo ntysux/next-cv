@@ -15,7 +15,7 @@ export interface SimpleLayout {
 export interface Image {
   type: 'image'
   url: string,
-  align: 'start' | 'end' | 'center'
+  isAvatar: boolean
 }
 export interface Note {
   type: 'note'

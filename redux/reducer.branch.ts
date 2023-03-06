@@ -42,7 +42,7 @@ const branchReducer = (section: Section = initSection, action: Action): Section 
           { 
             type: 'image',
             url: '',
-            align: action.payload.align
+            isAvatar: action.payload.isAvatar
           }
         ]
       }
