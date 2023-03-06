@@ -1,22 +1,29 @@
 export interface TableLayout {
+  type: 'table' 
   th: string[],
   td: any[]
 }
 export interface BasicLayout {
+  type: 'basic'
   name?: string,
   value?: string
 }
+export interface SimpleLayout {
+  type: 'simple'
+  value: string
+}
 export interface Image {
+  type: 'image'
   url: string,
   align: 'left' | 'right' | 'top'
 }
-export interface Layout {
-  table?: TableLayout,
-  basic?: BasicLayout,
-  simple?: string,
-  image?: Image,
-  note?: string
+export interface Note {
+  type: 'note'
+  value: string
 }
+
+export type Layout = TableLayout | BasicLayout | SimpleLayout | Image | Note
+
 export interface Section {
   name: string,
   chil: Layout[]
