@@ -114,19 +114,19 @@ export default function SectionMenuOptions() {
                   <MenuGroup>
                     <MenuItem
                       icon={<IconBorderLeft color='#88898C' size='18px' />}
-                      onClick={() => handleAddImage('left')}
+                      onClick={() => handleAddImage('start')}
                     >
                       Bên trái
                     </MenuItem>
                     <MenuItem
                       icon={<IconBorderRight color='#88898C' size='18px' />}
-                      onClick={() => handleAddImage('right')}
+                      onClick={() => handleAddImage('end')}
                     >
                       Bên phải
                     </MenuItem>
                     <MenuItem
                       icon={<IconBorderTop color='#88898C' size='18px' />}
-                      onClick={() => handleAddImage('top')}
+                      onClick={() => handleAddImage('center')}
                     >
                       Bên trên
                     </MenuItem>
