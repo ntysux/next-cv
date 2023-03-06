@@ -1,5 +1,5 @@
 import { Box, Center, Collapse, HStack, IconButton, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Spacer, Text, useDisclosure } from "@chakra-ui/react";
-import { IconBorderLeft, IconBorderRight, IconBorderTop, IconChevronRight, IconLayoutBoard, IconLayoutColumns, IconLayoutNavbar, IconNote, IconPencilMinus, IconPhoto, IconTable } from "@tabler/icons-react";
+import { IconChevronRight, IconLayoutBoard, IconLayoutColumns, IconLayoutNavbar, IconNote, IconPencilMinus, IconPhoto, IconRectangle, IconTable, IconUserCircle } from "@tabler/icons-react";
 import { useSelector, useDispatch } from "react-redux";
 import { ChangeEvent, useRef } from "react";
 import { RootState } from "@/redux/store";
@@ -10,19 +10,24 @@ export default function SectionMenuOptions() {
   const { isOpen: isImageOpen, onToggle: onImageToggle } = useDisclosure();
   const inputRef = useRef<HTMLInputElement>(null); // rename input ref
   const dispatch = useDispatch();
+
   // get current color
   const { color } = useSelector((state: RootState) => state.cv);
+
   // focus input when click
   const handleClickFocusInput = () => inputRef.current?.focus();
+
   // add Note using redux action
   const handleAddNote = () => dispatch(addNoteBranchSection());
+
   // rename section using redux action
   const handleRenameSection = (event: ChangeEvent) => {
     const input = event.target as HTMLInputElement;
     dispatch(renameBranchSection(input.value));
   }
+  
   // add Image using redux action
-  const handleAddImage = (align: string) => dispatch(addImageBranchSection(align));
+  const handleAddImage = (isAvatar: boolean) => dispatch(addImageBranchSection(isAvatar));
 
   return (
     <>
@@ -113,22 +118,16 @@ export default function SectionMenuOptions() {
                 <Collapse in={isImageOpen} animateOpacity>
                   <MenuGroup>
                     <MenuItem
-                      icon={<IconBorderLeft color='#88898C' size='18px' />}
-                      onClick={() => handleAddImage('start')}
+                      icon={<IconUserCircle color='#88898C' size='18px' />}
+                      onClick={() => handleAddImage(true)}
                     >
-                      Bên trái
+                      Ảnh đại diện
                     </MenuItem>
                     <MenuItem
-                      icon={<IconBorderRight color='#88898C' size='18px' />}
-                      onClick={() => handleAddImage('end')}
+                      icon={<IconRectangle color='#88898C' size='18px' />}
+                      onClick={() => handleAddImage(false)}
                     >
-                      Bên phải
-                    </MenuItem>
-                    <MenuItem
-                      icon={<IconBorderTop color='#88898C' size='18px' />}
-                      onClick={() => handleAddImage('center')}
-                    >
-                      Bên trên
+                      Ảnh ngang
                     </MenuItem>
                   </MenuGroup>
                 </Collapse>
