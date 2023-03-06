@@ -5,10 +5,10 @@ const initSection: Section = {
   chil: []
 }
 
-const branchReducer = (section = initSection, action: Action) => {
+const branchReducer = (section: Section = initSection, action: Action): Section => {
   switch(action.type) {
     case 'CANCEL_BRANCH_SECTION':
-      return initSection
+      return section
     case 'RENAME_BRANCH_SECTION':
       return {...section, name: action.payload.name}
     case 'ADD_NOTE_BRANCH_SECTION':

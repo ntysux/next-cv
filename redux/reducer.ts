@@ -8,7 +8,7 @@ const initCv: Cv = {
   section: []
 }
 
-const mainReducer = (cv: Cv = initCv, action: Action) => {
+const mainReducer = (cv: Cv = initCv, action: Action): Cv => {
   switch(action.type) {
     case 'CREATE':
       return cv
