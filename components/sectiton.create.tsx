@@ -1,77 +1,75 @@
-import * as C from "@chakra-ui/react";
-import * as TB from "@tabler/icons-react";
+import { Button, Center, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
+import { IconPlus } from "@tabler/icons-react";
+import { useSelector, useDispatch } from "react-redux";
 import SectionMenuActions from "./section.menu-options";
-import { useSelector, useDispatch } from 'react-redux';
-import { mergeSectionCreate, cancelBranchSection, removeLayoutItemBranchSection } from "@/redux/actions";
+import { mergeSectionCreate, cancelBranchSection } from "@/redux/actions";
 import { RootState } from "@/redux/store";
-import Note from "./layout.note";
-import { CloseButton, DialogCloseButton } from "./closebutton";
+import { DialogCloseButton } from "./closebutton";
+import LayoutEdit from "./layout.edit";
 
 export default function SectionCreate() {
-  const { isOpen, onOpen, onClose } = C.useDisclosure();
-  const section = useSelector((state: RootState) => state.section);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const dispatch = useDispatch();
 
-  function merge() {
+  // get section current from redux state
+  const section = useSelector((state: RootState) => state.section);
+  
+  // merge section with cv section
+  const merge = () => {
     onClose();
     dispatch(mergeSectionCreate(section));
+    dispatch(cancelBranchSection());
+  }
+  
+  // cancel create section
+  const cancelSection = () => {
+    onClose();
     dispatch(cancelBranchSection());
   }
 
   return (
     <>
-      <C.IconButton
+      <IconButton
         onClick={onOpen}
         aria-label='add section'
         variant='unstyledGrayHoverWhite'
-        icon={<TB.IconPlus size='18px' strokeWidth='3' />}
+        icon={<IconPlus size='18px' strokeWidth='3' />}
         size='sm'
       />
-      <C.Modal scrollBehavior='inside' isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
-        <C.ModalOverlay />
-        <C.ModalContent maxW='container.lg'>
-          <C.ModalHeader>
-            <C.Center position='relative'>
-              <C.HStack
+      <Modal scrollBehavior='inside' isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
+        <ModalOverlay />
+        <ModalContent maxW='container.lg'>
+          <ModalHeader>
+            <Center position='relative'>
+              <HStack
                 bg='app.black.light'
                 p={1}
                 pl={3}
                 rounded='full'
               >
-                <C.Text fontSize='sm' color='white'>{section.name}</C.Text>
+                <Text fontSize='sm' color='white'>{section.name}</Text>
                 <SectionMenuActions />
-              </C.HStack>
-              <DialogCloseButton onClick={() => {onClose(); dispatch(cancelBranchSection())}} />
-            </C.Center>
-          </C.ModalHeader>
-          <C.ModalBody>
-            {
-              section.chil.map((item: any, key: number) => 
-                <C.Box key={key}>
-                  {
-                    typeof item.note === 'string' &&
-                    <Note index={key}>
-                      <CloseButton onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
-                    </Note>
-                  }
-                </C.Box>
-              )
-            }
-          </C.ModalBody>
-          <C.ModalFooter>
-            <C.Center w='full'>
-              <C.Button
+              </HStack>
+              <DialogCloseButton onClick={cancelSection} />
+            </Center>
+          </ModalHeader>
+          <ModalBody>
+            <LayoutEdit />
+          </ModalBody>
+          <ModalFooter>
+            <Center w='full'>
+              <Button
                 onClick={merge}
                 variant='solidBlack'
                 size='sm'
                 w='2xs'
               >
                 Tạo
-              </C.Button>
-            </C.Center>
-          </C.ModalFooter>
-        </C.ModalContent>
-      </C.Modal>
+              </Button>
+            </Center>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }
