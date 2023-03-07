@@ -10,6 +10,12 @@ const filledGray = defineStyle({
   _focus: {bg: 'none', borderColor: 'app.gray.light2'}
 });
 
+const outlineGray = defineStyle({
+  border: '2px',
+  borderColor: 'app.gray.dark',
+  color: 'app.black.light'
+});
+
 export const textareaTheme = defineStyleConfig({
-  variants: { filledGray }
+  variants: { filledGray, outlineGray }
 });
