@@ -1,4 +1,4 @@
-import { Action, Section } from "./state.interface";
+import { Action, BasicLayout, Section } from "./state.interface";
 
 const initSection: Section = {
   name: 'Untited',
@@ -67,6 +67,18 @@ const branchReducer = (section: Section = initSection, action: Action): Section 
           {
             type: 'basic'
           }
+        ]
+      }
+    case 'SET_BASIC_TITLE_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil.slice(0, action.payload.index),
+          { 
+            ...action.payload.currentBasic,
+            title: action.payload.title,
+          },
+          ...section.chil.slice(action.payload.index + 1)
         ]
       }
     case 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION':

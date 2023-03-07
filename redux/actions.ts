@@ -1,4 +1,4 @@
-import { Section } from "./state.interface";
+import { BasicLayout, Section } from "./state.interface";
 
 // for main
 export const create = () => ({
@@ -61,4 +61,9 @@ export const setUrlImageBranchSection = (index: number, url: string, isAvatar: b
 
 export const addBasicBranchSection = () => ({
   type: 'ADD_BASIC_BRANCH_SECTION'
+});
+
+export const setBasicTitleBranchSection = (index: number, currentBasic: BasicLayout, title: string) => ({
+  type: 'SET_BASIC_TITLE_BRANCH_SECTION',
+  payload: {index, currentBasic, title}
 });
