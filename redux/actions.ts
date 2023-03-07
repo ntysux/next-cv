@@ -58,3 +58,7 @@ export const setUrlImageBranchSection = (index: number, url: string, isAvatar: b
   type: 'SET_URL_IMAGE_BRANCH_SECTION',
   payload: {index, url, isAvatar}
 });
+
+export const addBasicBranchSection = () => ({
+  type: 'ADD_BASIC_BRANCH_SECTION'
+});
