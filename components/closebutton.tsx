@@ -2,7 +2,7 @@ import { IconButton } from "@chakra-ui/react";
 import { IconX } from "@tabler/icons-react";
 
 interface Props {
-  onClick: () => void
+  onClick?: () => void
 }
 
 export const DialogCloseButton = ({ onClick }: Props) =>
