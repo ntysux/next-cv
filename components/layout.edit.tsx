@@ -40,7 +40,7 @@ export default function LayoutEdit() {
           }
           {
             item.type === 'basic' &&
-            <BasicLayout>
+            <BasicLayout index={key} currentBasic={item}>
               <CloseButtonDefault onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
             </BasicLayout>
           }
