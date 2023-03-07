@@ -3,7 +3,7 @@ import { IconChevronRight, IconLayoutBoard, IconLayoutColumns, IconLayoutNavbar,
 import { useSelector, useDispatch } from "react-redux";
 import { ChangeEvent, useRef } from "react";
 import { RootState } from "@/redux/store";
-import { addImageBranchSection, addNoteBranchSection, renameBranchSection } from "@/redux/actions";
+import { addBasicBranchSection, addImageBranchSection, addNoteBranchSection, renameBranchSection } from "@/redux/actions";
 
 export default function SectionMenuOptions() {
   const { isOpen: isLayoutOpen, onToggle: onLayoutToggle } = useDisclosure();
@@ -28,6 +28,9 @@ export default function SectionMenuOptions() {
   
   // add Image using redux action
   const handleAddImage = (isAvatar: boolean) => dispatch(addImageBranchSection(isAvatar));
+
+  // add Basic using redux action
+  const handleAddBasic = () => dispatch(addBasicBranchSection());
 
   return (
     <>
@@ -92,7 +95,12 @@ export default function SectionMenuOptions() {
                 <Collapse in={isLayoutOpen} animateOpacity>
                   <MenuGroup>
                     <MenuItem isDisabled icon={<IconTable color='white' size='18px' />} command='Đang cập nhập'>Bảng</MenuItem>
-                    <MenuItem icon={<IconLayoutColumns color='white' size='18px' />}>Cơ bản</MenuItem>
+                    <MenuItem
+                      icon={<IconLayoutColumns color='white' size='18px' />}
+                      onClick={handleAddBasic}
+                    >
+                      Cơ bản
+                    </MenuItem>
                     <MenuItem icon={<IconLayoutNavbar color='white' size='18px' />}>Đơn giản</MenuItem>
                   </MenuGroup>
                 </Collapse>

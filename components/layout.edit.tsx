@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ImageLayout from "./layout.image";
 import NoteLayout from "./layout.note";
 import { CloseButtonDefault } from "./closebutton";
+import BasicLayout from "./layout.basic";
 
 interface Map {
   array: Layout[],
@@ -36,6 +37,12 @@ export default function LayoutEdit() {
             <ImageLayout index={key} isAvatar={item.isAvatar}>
               <CloseButtonDefault onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
             </ImageLayout>
+          }
+          {
+            item.type === 'basic' &&
+            <BasicLayout>
+              <CloseButtonDefault onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
+            </BasicLayout>
           }
         </Box>
       } />
