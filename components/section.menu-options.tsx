@@ -91,9 +91,9 @@ export default function SectionMenuOptions() {
                 {/* Layout options */}
                 <Collapse in={isLayoutOpen} animateOpacity>
                   <MenuGroup>
-                    <MenuItem icon={<IconTable color='#88898C' size='18px' />}>Bảng</MenuItem>
-                    <MenuItem icon={<IconLayoutColumns color='#88898C' size='18px' />}>Cơ bản</MenuItem>
-                    <MenuItem icon={<IconLayoutNavbar color='#88898C' size='18px' />}>Đơn giản</MenuItem>
+                    <MenuItem isDisabled icon={<IconTable color='white' size='18px' />} command='Đang cập nhập'>Bảng</MenuItem>
+                    <MenuItem icon={<IconLayoutColumns color='white' size='18px' />}>Cơ bản</MenuItem>
+                    <MenuItem icon={<IconLayoutNavbar color='white' size='18px' />}>Đơn giản</MenuItem>
                   </MenuGroup>
                 </Collapse>
                 <MenuDivider />
@@ -118,13 +118,13 @@ export default function SectionMenuOptions() {
                 <Collapse in={isImageOpen} animateOpacity>
                   <MenuGroup>
                     <MenuItem
-                      icon={<IconUserCircle color='#88898C' size='18px' />}
+                      icon={<IconUserCircle color='white' size='18px' />}
                       onClick={() => handleAddImage(true)}
                     >
                       Ảnh đại diện
                     </MenuItem>
                     <MenuItem
-                      icon={<IconRectangle color='#88898C' size='18px' />}
+                      icon={<IconRectangle color='white' size='18px' />}
                       onClick={() => handleAddImage(false)}
                     >
                       Ảnh ngang
