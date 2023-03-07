@@ -5,8 +5,8 @@ export interface TableLayout {
 }
 export interface BasicLayout {
   type: 'basic'
-  name?: string,
-  value?: string
+  title?: string,
+  content?: string
 }
 export interface SimpleLayout {
   type: 'simple'
