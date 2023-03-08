@@ -47,7 +47,7 @@ export default function LayoutEdit() {
           }
           {
             item.type === 'simple' &&
-            <SimpleLayout>
+            <SimpleLayout index={key} currentSimple={item}>
               <CloseButtonDefault onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
             </SimpleLayout>
           }
