@@ -1,4 +1,4 @@
-import { BasicLayout, Section } from "./state.interface";
+import { BasicLayout, Section, SimpleLayout } from "./state.interface";
 
 // for main
 export const create = () => ({
@@ -75,4 +75,9 @@ export const setBasicContentBranchSection = (index: number, currentBasic: BasicL
 
 export const addSimpleBranchSection = () => ({
   type: 'ADD_SIMPLE_BRANCH_SECTION'
+});
+
+export const setContentSimpleBranchSection = (index: number, currentSimple: SimpleLayout, content: string) => ({
+  type: 'SET_CONTENT_SIMPLE_BRANCH_SECTION',
+  payload: {index, currentSimple, content}
 });
