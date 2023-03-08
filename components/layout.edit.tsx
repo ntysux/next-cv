@@ -7,6 +7,7 @@ import ImageLayout from "./layout.image";
 import NoteLayout from "./layout.note";
 import { CloseButtonDefault } from "./closebutton";
 import BasicLayout from "./layout.basic";
+import SimpleLayout from "./layout.simple";
 
 interface Map {
   array: Layout[],
@@ -43,6 +44,12 @@ export default function LayoutEdit() {
             <BasicLayout index={key} currentBasic={item}>
               <CloseButtonDefault onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
             </BasicLayout>
+          }
+          {
+            item.type === 'simple' &&
+            <SimpleLayout>
+              <CloseButtonDefault onClick={() => dispatch(removeLayoutItemBranchSection(key))} />
+            </SimpleLayout>
           }
         </Box>
       } />

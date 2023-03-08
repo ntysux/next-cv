@@ -3,7 +3,7 @@ import { IconChevronRight, IconLayoutBoard, IconLayoutColumns, IconLayoutNavbar,
 import { useSelector, useDispatch } from "react-redux";
 import { ChangeEvent, useRef } from "react";
 import { RootState } from "@/redux/store";
-import { addBasicBranchSection, addImageBranchSection, addNoteBranchSection, renameBranchSection } from "@/redux/actions";
+import { addBasicBranchSection, addImageBranchSection, addNoteBranchSection, addSimpleBranchSection, renameBranchSection } from "@/redux/actions";
 
 export default function SectionMenuOptions() {
   const { isOpen: isLayoutOpen, onToggle: onLayoutToggle } = useDisclosure();
@@ -31,6 +31,9 @@ export default function SectionMenuOptions() {
 
   // add Basic using redux action
   const handleAddBasic = () => dispatch(addBasicBranchSection());
+
+  // add Simple using redux action
+  const handleAddSimple = () => dispatch(addSimpleBranchSection());
 
   return (
     <>
@@ -94,14 +97,21 @@ export default function SectionMenuOptions() {
                 {/* Layout options */}
                 <Collapse in={isLayoutOpen} animateOpacity>
                   <MenuGroup>
-                    <MenuItem isDisabled icon={<IconTable color='white' size='18px' />} command='Đang cập nhập'>Bảng</MenuItem>
+                    <MenuItem isDisabled icon={<IconTable color='white' size='18px' />} command='Đang cập nhập'>
+                      Bảng
+                    </MenuItem>
                     <MenuItem
                       icon={<IconLayoutColumns color='white' size='18px' />}
                       onClick={handleAddBasic}
                     >
                       Cơ bản
                     </MenuItem>
-                    <MenuItem icon={<IconLayoutNavbar color='white' size='18px' />}>Đơn giản</MenuItem>
+                    <MenuItem
+                      icon={<IconLayoutNavbar color='white' size='18px' />}
+                      onClick={handleAddSimple}
+                    >
+                      Đơn giản
+                    </MenuItem>
                   </MenuGroup>
                 </Collapse>
                 <MenuDivider />
