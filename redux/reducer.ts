@@ -6,18 +6,16 @@ const initCv: Cv = {
   mode: false,
   pin: null,
   section: []
-}
+}; 
 
-const mainReducer = (cv: Cv = initCv, action: Action): Cv => {
+const mainReducer = (cv = initCv, action: Action): Cv => {
   switch(action.type) {
-    case 'CREATE':
-      return cv
     case 'SET_COLOR':
-      return {...cv, color: action.payload.color}
+      return {...cv, color: action.payload.color};
     case 'RENAME':
-      return {...cv, name: action.payload.name}
+      return {...cv, name: action.payload.name};
     case 'CHANGE_MODE':
-      return {...cv, mode: action.payload.mode}
+      return {...cv, mode: action.payload.mode};
     case 'MERGE_SECTION_CREATE':
       return {
         ...cv,
@@ -25,9 +23,9 @@ const mainReducer = (cv: Cv = initCv, action: Action): Cv => {
           ...cv.section,
           action.payload.section
         ]
-      } 
+      };
     default:
-      return cv
+      return cv;
   }
 }
 
