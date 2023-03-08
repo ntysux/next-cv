@@ -1,33 +1,39 @@
-export interface TableLayout {
-  type: 'table' 
-  th: string[],
-  td: any[]
+enum DisplayDataType {
+  Basic = 'basic',
+  Simple = 'simple',
+  Image= 'image',
+  Note= 'note'
 }
-export interface BasicLayout {
-  type: 'basic'
+
+export interface Simple {
+  type: DisplayDataType.Simple,
+  content?: string
+}
+
+export interface Basic {
+  type: DisplayDataType.Basic,
   title?: string,
   content?: string
 }
-export interface SimpleLayout {
-  type: 'simple'
-  content?: string
-}
+
 export interface Image {
-  type: 'image'
-  url: string,
+  type: DisplayDataType.Image,
+  url?: string,
   isAvatar: boolean
 }
+
 export interface Note {
-  type: 'note'
-  value: string
+  type: DisplayDataType.Note,
+  content?: string
 }
 
-export type Layout = TableLayout | BasicLayout | SimpleLayout | Image | Note
+export type DisplayData = Basic | Simple | Image | Note
 
 export interface Section {
   name: string,
-  chil: Layout[]
+  data: DisplayData[]
 }
+
 export interface Cv {
   name: string,
   color: string,
@@ -35,6 +41,7 @@ export interface Cv {
   pin: number | null,
   section: Section[]
 }
+
 export interface Action {
   type: string,
   payload?: any
