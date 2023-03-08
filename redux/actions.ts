@@ -72,3 +72,7 @@ export const setBasicContentBranchSection = (index: number, currentBasic: BasicL
   type: 'SET_BASIC_CONTENT_BRANCH_SECTION',
   payload: {index, currentBasic, content}
 });
+
+export const addSimpleBranchSection = () => ({
+  type: 'ADD_SIMPLE_BRANCH_SECTION'
+});

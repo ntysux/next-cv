@@ -93,6 +93,14 @@ const branchReducer = (section: Section = initSection, action: Action): Section 
           ...section.chil.slice(action.payload.index + 1)
         ]
       }
+    case 'ADD_SIMPLE_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil,
+          {type: 'simple'}
+        ]
+      }
     case 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION':
       return {
         ...section,
