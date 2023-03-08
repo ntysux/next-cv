@@ -10,7 +10,7 @@ export interface BasicLayout {
 }
 export interface SimpleLayout {
   type: 'simple'
-  value: string
+  content?: string
 }
 export interface Image {
   type: 'image'
