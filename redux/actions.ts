@@ -67,3 +67,8 @@ export const setBasicTitleBranchSection = (index: number, currentBasic: BasicLay
   type: 'SET_BASIC_TITLE_BRANCH_SECTION',
   payload: {index, currentBasic, title}
 });
+
+export const setBasicContentBranchSection = (index: number, currentBasic: BasicLayout, content: string) => ({
+  type: 'SET_BASIC_CONTENT_BRANCH_SECTION',
+  payload: {index, currentBasic, content}
+});

@@ -1,4 +1,4 @@
-import { setBasicTitleBranchSection } from "@/redux/actions";
+import { setBasicContentBranchSection, setBasicTitleBranchSection } from "@/redux/actions";
 import { BasicLayout as Basic } from "@/redux/state.interface";
 import { Box, Grid, GridItem, HStack, Textarea } from "@chakra-ui/react";
 import { FocusEvent } from "react";
@@ -19,6 +19,12 @@ export default function BasicLayout ({children, currentBasic, index}: Props) {
     dispatch(setBasicTitleBranchSection(index, currentBasic, textarea.value));
   }
 
+  // set content Basic use redux state
+  const handleSetContent = (event: FocusEvent) => {
+    const textarea = event.target as HTMLTextAreaElement;
+    dispatch(setBasicContentBranchSection(index, currentBasic, textarea.value));
+  }
+
   return (
     <>
       <HStack>
@@ -32,7 +38,11 @@ export default function BasicLayout ({children, currentBasic, index}: Props) {
               />
             </GridItem>
             <GridItem colSpan={2}>
-              <Textarea variant='outlineGray' minH='200px' />
+              <Textarea
+                variant='outlineGray'
+                minH='200px'
+                onBlur={e => handleSetContent(e)}  
+              />
             </GridItem>
           </Grid>
         </Box>

@@ -81,6 +81,18 @@ const branchReducer = (section: Section = initSection, action: Action): Section 
           ...section.chil.slice(action.payload.index + 1)
         ]
       }
+    case 'SET_BASIC_CONTENT_BRANCH_SECTION':
+      return {
+        ...section,
+        chil: [
+          ...section.chil.slice(0, action.payload.index),
+          { 
+            ...action.payload.currentBasic,
+            content: action.payload.content,
+          },
+          ...section.chil.slice(action.payload.index + 1)
+        ]
+      }
     case 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION':
       return {
         ...section,
