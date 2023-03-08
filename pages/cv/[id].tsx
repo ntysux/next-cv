@@ -28,7 +28,7 @@ export default function CvPage() {
         <Container maxW='container.lg'>
           <Dashboard />
           <Map array={section} render={(section, key) => 
-            <SectionView key={key} value={{section, key}} />
+            <SectionView key={key} index={key} />
           }/>
         </Container>
       </Flex>

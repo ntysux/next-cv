@@ -1,13 +1,21 @@
-import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, Center, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, Center, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Tag, Text, useDisclosure } from "@chakra-ui/react";
 import { IconX } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SectionMenuActions from "./section.menu-options";
-import { Section } from "@/redux/state.interface";
+import { Layout } from "@/redux/state.interface";
 
-export default function SectionView({value}: {value: {section: Section, key: number}}) {
+interface Map {
+  array: Layout[],
+  render: (item: Layout, key: number) => JSX.Element
+}
+
+const Map = ({array, render}: Map) =>
+  <>{array.map((item, key) => render(item, key))}</>
+
+export default function SectionView({index}: {index: number}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // get curren color, mode & section from redux state
+  // get current color, mode & section from redux state
   const { color, mode, section } = useSelector((state: RootState) => state.cv);
 
   return (
@@ -17,7 +25,7 @@ export default function SectionView({value}: {value: {section: Section, key: num
           {({ isExpanded }) => (
             <>
               <HStack>
-                <AccordionButton>{section[value.key].name}</AccordionButton>
+                <AccordionButton>{section[index].name}</AccordionButton>
                 <Box
                   onClick={() => mode && onOpen()}
                   cursor={mode ? 'pointer' : 'default'}
@@ -31,10 +39,22 @@ export default function SectionView({value}: {value: {section: Section, key: num
                 />
               </HStack>
               <AccordionPanel>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                commodo consequat.
+                <Map array={section[index].chil} render={(item, key) => 
+                  <Box key={key}>
+                    {
+                      item.type === 'note' && <Tag bg='app.gray.dark'>Note here</Tag>
+                    }
+                    {
+                      item.type === 'image' && <Box>Image here</Box>
+                    }
+                    {
+                      item.type === 'basic' && <Box>basic here</Box>
+                    }
+                    {
+                      item.type === 'simple' && <Box>simple here</Box>
+                    }
+                  </Box>
+                } />
               </AccordionPanel>
             </>
           )}
@@ -52,7 +72,7 @@ export default function SectionView({value}: {value: {section: Section, key: num
                 pl={3}
                 rounded='full'
               >
-                <Text fontSize='sm' color='white'>{section[value.key].name}</Text>
+                <Text fontSize='sm' color='white'>{section[index].name}</Text>
                 <SectionMenuActions />
               </HStack>
               <IconButton
