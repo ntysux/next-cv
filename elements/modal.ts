@@ -12,17 +12,7 @@ const baseStyle = definePartsStyle({
     rounded: '2xl',
     boxShadow: 'none'
   },
-  header: {
-    py: 1,
-    px: 2,
-    bg: 'app.black.dark',
-    roundedTop: '2xl',
-  },
   body: {
-    p: 2,
-    minH: '60vh'
-  },
-  footer: {
     p: 2
   }
 });
