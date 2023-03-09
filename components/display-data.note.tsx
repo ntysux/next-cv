@@ -15,8 +15,10 @@ interface Map {
   render: (line: string, index: number) => JSX.Element
 }
 
+// handle text down the line from textarea
 const Map = ({array, render}: Map) => <>{array?.map((line, index) => render(line, index))}</>
 
+// Note edit
 export function NoteEdit({index, currentNote}: Props) {
   const dispatch = useDispatch();
 
@@ -40,6 +42,7 @@ export function NoteEdit({index, currentNote}: Props) {
   );
 }
 
+// Note view
 export function NoteView({data}: {data: Note}) {
   return (
     <Box color='app.gray.dark'>
