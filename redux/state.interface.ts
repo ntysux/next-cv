@@ -1,8 +1,8 @@
-enum DisplayDataType {
+export enum DisplayDataType {
   Basic = 'basic',
   Simple = 'simple',
-  Image= 'image',
-  Note= 'note'
+  Image = 'image',
+  Note = 'note'
 }
 
 export interface Simple {
