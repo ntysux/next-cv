@@ -7,21 +7,27 @@ import { Note } from "@/redux/state.interface";
 
 interface Props {
   index: number,
-  data: Note
+  currentNote: Note
 }
 
-export function NoteEdit({index, data}: Props) {
+interface Map {
+  array: string[] | undefined,
+  render: (line: string, index: number) => JSX.Element
+}
+
+const Map = ({array, render}: Map) => <>{array?.map((line, index) => render(line, index))}</>
+
+export function NoteEdit({index, currentNote}: Props) {
   const dispatch = useDispatch();
 
   // set note content
   const handleSetNoteContent = (event: FocusEvent) => {
     const textarea = event.target as HTMLTextAreaElement;
-    dispatch(setNoteContentSection(index, data,textarea.value));
+    dispatch(setNoteContentSection(index, currentNote, textarea.value));
   }
 
   // remove note
   const handleRemoveNote = () => dispatch(removeDataSection(index));
-
 
   return (
     <HStack>
@@ -37,11 +43,11 @@ export function NoteEdit({index, data}: Props) {
 export function NoteView({data}: {data: Note}) {
   return (
     <Box color='app.gray.dark'>
-      {data.content?.split("\n").map((line, index) => (
+      <Map array={data.content?.split("\n")} render={(line, index) =>
         <Box key={index}>
           # {line}
         </Box>
-      ))}
+      } />
     </Box>
   );
 }
