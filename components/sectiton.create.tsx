@@ -1,10 +1,9 @@
-import { Button, Center, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from "@chakra-ui/react";
-import { IconPlus } from "@tabler/icons-react";
+import { Box, Button, Center, Flex, HStack, IconButton, Modal, ModalBody, ModalContent, ModalOverlay, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
+import { IconPlus, IconX } from "@tabler/icons-react";
 import { useSelector, useDispatch } from "react-redux";
 import SectionMenuActions from "./section.menu-options";
-import { mergeSectionCreate, cancelBranchSection } from "@/redux/actions";
+import { mergeSectionCreate, cancelSection } from "@/redux/actions";
 import { RootState } from "@/redux/store";
-import { DialogCloseButton } from "./closebutton";
 import LayoutEdit from "./layout.edit";
 
 export default function SectionCreate() {
@@ -18,56 +17,89 @@ export default function SectionCreate() {
   const merge = () => {
     onClose();
     dispatch(mergeSectionCreate(section));
-    dispatch(cancelBranchSection());
+    dispatch(cancelSection());
   }
   
   // cancel create section
-  const cancelSection = () => {
+  const cancel = () => {
     onClose();
-    dispatch(cancelBranchSection());
+    dispatch(cancelSection());
   }
 
   return (
     <>
       <IconButton
+        size='sm'
         onClick={onOpen}
         aria-label='add section'
         variant='unstyledGrayHoverWhite'
         icon={<IconPlus size='18px' strokeWidth='3' />}
-        size='sm'
       />
-      <Modal scrollBehavior='inside' isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        scrollBehavior='inside'
+        closeOnOverlayClick={false}
+      >
         <ModalOverlay />
         <ModalContent maxW='container.lg'>
-          <ModalHeader>
-            <Center position='relative'>
+          <SimpleGrid
+            p={1}
+            columns={3}
+            roundedTop='2xl'
+            bg='app.black.dark'
+          >
+            <Box />
+            <Center>
               <HStack
-                bg='app.black.light'
                 p={1}
                 pl={3}
+                w='min'
                 rounded='full'
+                bg='app.black.light'
               >
                 <Text fontSize='sm' color='white'>{section.name}</Text>
                 <SectionMenuActions />
               </HStack>
-              <DialogCloseButton onClick={cancelSection} />
             </Center>
-          </ModalHeader>
+            <Flex justify='right' align='center' pr={1}>
+              <IconButton
+                aria-label='close dialog'
+                variant='closeDialog'
+                size='xs'
+                onClick={cancel}
+                icon={<IconX size='16px' strokeWidth='3' />}
+              />
+            </Flex>
+          </SimpleGrid>
           <ModalBody>
-            <LayoutEdit />
+            {
+              section.data.length === 0 ?
+                <Center minH='50vh'>
+                  <Text
+                    fontWeight='500'
+                    textAlign='center'
+                    color='app.gray.light1'
+                  >
+                    Các dạng dữ liệu hiển thị sẽ được trình bày tại đây.
+                  </Text>
+                </Center> 
+              : 
+                <Box minH='50vh'>
+                  <LayoutEdit />
+                </Box>
+            }
           </ModalBody>
-          <ModalFooter>
-            <Center w='full'>
-              <Button
-                onClick={merge}
-                variant='solidBlack'
-                size='sm'
-                w='2xs'
-              >
-                Tạo
-              </Button>
-            </Center>
-          </ModalFooter>
+          <Center p={2}>
+            <Button
+              onClick={merge}
+              variant='solidBlack'
+              size='sm'
+              w='2xs'
+            >
+              Tạo
+            </Button>
+          </Center>
         </ModalContent>
       </Modal>
     </>
