@@ -58,7 +58,7 @@ export default function SectionCreate() {
                 rounded='full'
                 bg='app.black.light'
               >
-                <Text fontSize='sm' color='white'>{section.name}</Text>
+                <Text fontSize='sm' color='white' maxW='100px' noOfLines={1}>{section.name}</Text>
                 <SectionMenuActions />
               </HStack>
             </Center>
