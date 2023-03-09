@@ -25,7 +25,7 @@ export default function CvPage() {
         bgSize='17px 17px'
         bgGradient='radial(#88898C 8%, transparent 10%)'
       >
-        <Container maxW='container.lg'>
+        <Container maxW='container.lg' pb={8}>
           <Dashboard />
           <Map array={section} render={(section, key) => 
             <SectionView key={key} index={key} />
