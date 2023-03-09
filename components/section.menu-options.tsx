@@ -1,9 +1,9 @@
 import { Box, Center, Collapse, HStack, IconButton, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuList, Spacer, Text, useDisclosure } from "@chakra-ui/react";
-import { IconChevronRight, IconLayoutBoard, IconLayoutColumns, IconLayoutNavbar, IconNote, IconPencilMinus, IconPhoto, IconRectangle, IconTable, IconUserCircle } from "@tabler/icons-react";
+import { IconChevronRight, IconCircle, IconLayoutColumns, IconLayoutNavbar, IconNote, IconPencilMinus, IconPhoto, IconRectangle, IconStack2, IconTable } from "@tabler/icons-react";
 import { useSelector, useDispatch } from "react-redux";
 import { ChangeEvent, useRef } from "react";
 import { RootState } from "@/redux/store";
-import { addBasicBranchSection, addImageBranchSection, addNoteBranchSection, addSimpleBranchSection, renameBranchSection } from "@/redux/actions";
+import { addBasicSection, addImageSection, addNoteSection, addSimpleSection, renameSection } from "@/redux/actions";
 
 export default function SectionMenuOptions() {
   const { isOpen: isLayoutOpen, onToggle: onLayoutToggle } = useDisclosure();
@@ -13,27 +13,17 @@ export default function SectionMenuOptions() {
 
   // get current color
   const { color } = useSelector((state: RootState) => state.cv);
-
   // focus input when click
   const handleClickFocusInput = () => inputRef.current?.focus();
-
-  // add Note using redux action
-  const handleAddNote = () => dispatch(addNoteBranchSection());
-
-  // rename section using redux action
+  // rename section
   const handleRenameSection = (event: ChangeEvent) => {
     const input = event.target as HTMLInputElement;
-    dispatch(renameBranchSection(input.value));
+    dispatch(renameSection(input.value));
   }
-  
-  // add Image using redux action
-  const handleAddImage = (isAvatar: boolean) => dispatch(addImageBranchSection(isAvatar));
-
-  // add Basic using redux action
-  const handleAddBasic = () => dispatch(addBasicBranchSection());
-
-  // add Simple using redux action
-  const handleAddSimple = () => dispatch(addSimpleBranchSection());
+  const handleAddNote = () => dispatch(addNoteSection()); // add Note
+  const handleAddBasic = () => dispatch(addBasicSection()); // add Basic
+  const handleAddSimple = () => dispatch(addSimpleSection()); // add Simple
+  const handleAddImage = (isAvatar: boolean) => dispatch(addImageSection(isAvatar)); // add Image
 
   return (
     <>
@@ -77,14 +67,14 @@ export default function SectionMenuOptions() {
                   Ghi chú
                 </MenuItem>
                 <MenuDivider />
-                {/* Layout */}
+                {/* Display data */}
                 <MenuItem
                   closeOnSelect={false}
-                  icon={<IconLayoutBoard size='18px' />}
+                  icon={<IconStack2 size='18px' strokeWidth='2.5' />}
                   onClick={onLayoutToggle}
                 >
                   <HStack>
-                    <Text>Bố cục</Text>
+                    <Text fontWeight='700'>Bố cục</Text>
                     <Spacer />
                     <Box
                       transition='all 0.3s'
@@ -94,10 +84,14 @@ export default function SectionMenuOptions() {
                     </Box>
                   </HStack>
                 </MenuItem>
-                {/* Layout options */}
+                {/* Display data options */}
                 <Collapse in={isLayoutOpen} animateOpacity>
                   <MenuGroup>
-                    <MenuItem isDisabled icon={<IconTable color='white' size='18px' />} command='Đang cập nhập'>
+                    <MenuItem
+                      isDisabled
+                      icon={<IconTable color='white' size='18px' />}
+                      command='Đang cập nhập'
+                    >
                       Bảng
                     </MenuItem>
                     <MenuItem
@@ -118,11 +112,11 @@ export default function SectionMenuOptions() {
                 {/* Image */}
                 <MenuItem
                   closeOnSelect={false}
-                  icon={<IconPhoto size='18px' />}
+                  icon={<IconPhoto size='18px' strokeWidth='2.5' />}
                   onClick={onImageToggle}
                 >
                   <HStack>
-                    <Text>Ảnh</Text>
+                    <Text fontWeight='700'>Ảnh</Text>
                     <Spacer />
                     <Box
                       transition='all 0.3s'
@@ -136,10 +130,10 @@ export default function SectionMenuOptions() {
                 <Collapse in={isImageOpen} animateOpacity>
                   <MenuGroup>
                     <MenuItem
-                      icon={<IconUserCircle color='white' size='18px' />}
+                      icon={<IconCircle color='white' size='18px' />}
                       onClick={() => handleAddImage(true)}
                     >
-                      Ảnh đại diện
+                      Ảnh tròn
                     </MenuItem>
                     <MenuItem
                       icon={<IconRectangle color='white' size='18px' />}
