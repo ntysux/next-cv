@@ -1,10 +1,6 @@
-import { BasicLayout, Section, SimpleLayout } from "./state.interface";
+import { Basic, Image, Note, Section, Simple } from "./state.interface";
 
 // for main
-export const create = () => ({
-  type: 'CREATE'
-});
-
 export const setColorTheme = (color: string) => ({
   type: 'SET_COLOR',
   payload: {color}
@@ -26,58 +22,58 @@ export const mergeSectionCreate = (section: Section) => ({
 });
 
 // for branch
-export const cancelBranchSection = () => ({
-  type: 'CANCEL_BRANCH_SECTION'
+export const cancelSection = () => ({
+  type: 'CANCEL_SECTION'
 });
 
-export const renameBranchSection = (name: string) => ({
-  type: 'RENAME_BRANCH_SECTION',
+export const renameSection = (name: string) => ({
+  type: 'RENAME_SECTION',
   payload: {name}
 });
 
-export const addNoteBranchSection = () => ({
-  type: 'ADD_NOTE_BRANCH_SECTION'
+export const addNoteSection = () => ({
+  type: 'ADD_NOTE_SECTION'
 });
 
-export const setNoteValueBranchSection = (index: number, value: string) => ({
-  type: 'SET_NOTE_VALUE_BRANCH_SECTION',
-  payload: {index, value}
+export const setNoteContentSection = (index: number, currentNote: Note, content: string) => ({
+  type: 'SET_NOTE_CONTENT_SECTION',
+  payload: {index, currentNote, content}
 });
 
-export const removeLayoutItemBranchSection = (index: number) => ({
-  type: 'REMOVE_LAYOUT_ITEM_BRANCH_SECTION',
+export const removeDataSection = (index: number) => ({
+  type: 'REMOVE_DATA_SECTION',
   payload: {index}
 });
 
-export const addImageBranchSection = (isAvatar: boolean) => ({
-  type: 'ADD_IMAGE_BRANCH_SECTION',
+export const addImageSection = (isAvatar: boolean) => ({
+  type: 'ADD_IMAGE_SECTION',
   payload: {isAvatar}
 });
 
-export const setUrlImageBranchSection = (index: number, url: string, isAvatar: boolean) => ({
-  type: 'SET_URL_IMAGE_BRANCH_SECTION',
-  payload: {index, url, isAvatar}
+export const setImageUrlSection = (index: number, currentImage: Image, url: string) => ({
+  type: 'SET_IMAGE_URL_SECTION',
+  payload: {index, currentImage, url}
 });
 
-export const addBasicBranchSection = () => ({
-  type: 'ADD_BASIC_BRANCH_SECTION'
+export const addBasicSection = () => ({
+  type: 'ADD_BASIC_SECTION'
 });
 
-export const setBasicTitleBranchSection = (index: number, currentBasic: BasicLayout, title: string) => ({
-  type: 'SET_BASIC_TITLE_BRANCH_SECTION',
+export const setBasicTitleSection = (index: number, currentBasic: Basic, title: string) => ({
+  type: 'SET_BASIC_TITLE_SECTION',
   payload: {index, currentBasic, title}
 });
 
-export const setBasicContentBranchSection = (index: number, currentBasic: BasicLayout, content: string) => ({
-  type: 'SET_BASIC_CONTENT_BRANCH_SECTION',
+export const setBasicContentSection = (index: number, currentBasic: Basic, content: string) => ({
+  type: 'SET_BASIC_CONTENT_SECTION',
   payload: {index, currentBasic, content}
 });
 
-export const addSimpleBranchSection = () => ({
-  type: 'ADD_SIMPLE_BRANCH_SECTION'
+export const addSimpleSection = () => ({
+  type: 'ADD_SIMPLE_SECTION'
 });
 
-export const setContentSimpleBranchSection = (index: number, currentSimple: SimpleLayout, content: string) => ({
-  type: 'SET_CONTENT_SIMPLE_BRANCH_SECTION',
+export const setSimpleContentSection = (index: number, currentSimple: Simple, content: string) => ({
+  type: 'SET_SIMPLE_CONTENT_SECTION',
   payload: {index, currentSimple, content}
 });
