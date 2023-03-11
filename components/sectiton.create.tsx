@@ -1,5 +1,5 @@
 import { Box, Button, Center, Flex, HStack, IconButton, Modal, ModalBody, ModalContent, ModalOverlay, SimpleGrid, Text, useDisclosure } from "@chakra-ui/react";
-import { IconPlus, IconX } from "@tabler/icons-react";
+import { IconEdit, IconPlus, IconX } from "@tabler/icons-react";
 import { useSelector, useDispatch } from "react-redux";
 import SectionMenuActions from "./section.menu-options";
 import { mergeSectionCreate, cancelSection } from "@/redux/actions";
@@ -75,11 +75,11 @@ export default function SectionCreate() {
           <ModalBody>
             {
               section.data.length === 0 ?
-                <Center minH='50vh'>
+                <Center minH='50vh' flexDirection='column' color='app.gray.light1'>
+                  <IconEdit size='24px' />
                   <Text
                     fontWeight='500'
                     textAlign='center'
-                    color='app.gray.light1'
                   >
                     Các dạng dữ liệu hiển thị sẽ được trình bày tại đây.
                   </Text>
