@@ -40,8 +40,6 @@ const closeDialog = defineStyle({
 
 const close = defineStyle({
   color: 'app.gray.dark',
-  bg: 'none',
-  rounded: 'full',
   _hover: {color: 'app.black.light'}
 });
 
