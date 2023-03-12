@@ -1,6 +1,6 @@
 import { removeDataSection, setBasicContentSection, setBasicTitleSection } from "@/redux/actions";
 import { Basic } from "@/redux/state.interface";
-import { Box, Divider, Grid, GridItem, HStack, Textarea } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, Textarea } from "@chakra-ui/react";
 import { FocusEvent } from "react";
 import { useDispatch } from "react-redux";
 import { CloseButtonDefault } from "./closebutton";
@@ -64,16 +64,28 @@ const Map = ({array, render}: Map) => <>{array?.map((line, index) => render(line
 export function BasicView({data}: {data: Basic}) {
   return (
     <>
-      <Grid templateColumns='repeat(10, 1fr)'>
-        <GridItem colSpan={2}>
+      <Grid
+        templateColumns={{md: 'repeat(5, 1fr)', base: 'repeat(1, 1fr)'}}
+        gap={4}
+        color='app.black.light'
+      >
+        <GridItem
+          wordBreak='break-all'
+          fontWeight='600'
+        >
           <Map array={data.title?.split("\n")} render={(line, index) =>
             <Box key={index}>
               {line}
             </Box>
           } />
         </GridItem>
-        <Divider orientation="vertical" borderColor='app.gray.light1' />
-        <GridItem colSpan={7}>
+        <GridItem
+          colSpan={{md: 4, base: 1}}
+          p={2}
+          rounded='xl'
+          bg='app.gray.light3'
+          wordBreak='break-all'
+        >
           <Map array={data.content?.split("\n")} render={(line, index) =>
             <Box key={index}>
               {line}
