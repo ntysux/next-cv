@@ -1,10 +1,10 @@
-import { Center, Circle, Flex, FormControl, FormLabel, HStack, Img, Input, Modal, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
+import { Center, Circle, Flex, FormControl, FormLabel, HStack, IconButton, Img, Input, Modal, ModalContent, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 import { RootState } from "@/redux/store";
 import { ChangeEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeDataSection, setImageUrlSection } from "@/redux/actions";
 import { Image } from "@/redux/state.interface";
-import { CloseButtonDefault, DialogCloseButton } from "./closebutton";
+import { IconX } from "@tabler/icons-react";
 
 interface Props {
   index: number,
@@ -51,7 +51,13 @@ export function ImageEdit({index, currentImage}: Props) {
           <Input type='file' display='none' onChange={handleChangeImage} />
         </FormControl>
       </Center>
-      <CloseButtonDefault onClick={handleRemoveImage}/>
+      <IconButton
+        aria-label='close'
+        variant='close'
+        size='xs'
+        onClick={handleRemoveImage}
+        icon={<IconX size='16px' strokeWidth='3' />}
+      />
     </HStack>
   ) : (
     <HStack>
@@ -71,7 +77,13 @@ export function ImageEdit({index, currentImage}: Props) {
         </FormLabel>
         <Input type='file' display='none' onChange={handleChangeImage} />
       </FormControl>
-      <CloseButtonDefault onClick={handleRemoveImage}/>
+      <IconButton
+        aria-label='close'
+        variant='close'
+        size='xs'
+        onClick={handleRemoveImage}
+        icon={<IconX size='16px' strokeWidth='3' />}
+      />
     </HStack>
   );
 }
@@ -125,7 +137,13 @@ export function ImageView({data}: {data: Image}) {
             roundedTop='xl'
             justify='flex-end'
           >
-            <DialogCloseButton onClick={onClose} />
+            <IconButton
+              aria-label='close dialog'
+              variant='closeDialog'
+              size='xs'
+              onClick={onClose}
+              icon={<IconX size='16px' strokeWidth='3' />}
+            />
           </Flex>
           <Center
             minH='10vh'

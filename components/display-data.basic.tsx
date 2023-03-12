@@ -1,9 +1,9 @@
 import { removeDataSection, setBasicContentSection, setBasicTitleSection } from "@/redux/actions";
 import { Basic } from "@/redux/state.interface";
-import { Box, Grid, GridItem, HStack, Textarea } from "@chakra-ui/react";
+import { Box, Grid, GridItem, HStack, IconButton, Textarea } from "@chakra-ui/react";
+import { IconX } from "@tabler/icons-react";
 import { FocusEvent } from "react";
 import { useDispatch } from "react-redux";
-import { CloseButtonDefault } from "./closebutton";
 
 interface Props {
   currentBasic: Basic,
@@ -47,7 +47,13 @@ export function BasicEdit({currentBasic, index}: Props) {
           </Grid>
         </Box>
         <Box>
-          <CloseButtonDefault onClick={() => dispatch(removeDataSection(index))} />
+          <IconButton
+            aria-label='close'
+            variant='close'
+            size='xs'
+            onClick={() => dispatch(removeDataSection(index))}
+            icon={<IconX size='16px' strokeWidth='3' />}
+          />
         </Box>
       </HStack>
     </>

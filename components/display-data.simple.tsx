@@ -1,6 +1,7 @@
-import { setSimpleContentSection } from "@/redux/actions";
+import { removeDataSection, setSimpleContentSection } from "@/redux/actions";
 import { Simple } from "@/redux/state.interface";
-import { Box, HStack, Text, Textarea } from "@chakra-ui/react";
+import { Box, HStack, IconButton, Text, Textarea } from "@chakra-ui/react";
+import { IconX } from "@tabler/icons-react";
 import { FocusEvent } from "react";
 import { useDispatch } from "react-redux";
 
@@ -18,12 +19,22 @@ export function SimpleEdit({currentSimple, index}: Props) {
     dispatch(setSimpleContentSection(index, currentSimple, textarea.value));
   }
 
+  // remove simple
+  const handleRemoveSimple = () => dispatch(removeDataSection(index));
+
   return (
     <>
       <HStack>
         <Textarea
           variant='outlineGray'
           onBlur={e => handleSetSimpleContent(e)}
+        />
+        <IconButton
+          aria-label='close'
+          variant='close'
+          size='xs'
+          onClick={handleRemoveSimple}
+          icon={<IconX size='16px' strokeWidth='3' />}
         />
       </HStack>
     </>

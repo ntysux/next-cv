@@ -1,9 +1,9 @@
-import { Box, HStack, Textarea } from "@chakra-ui/react";
+import { Box, HStack, IconButton, Textarea } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { FocusEvent } from "react";
 import { removeDataSection, setNoteContentSection } from "@/redux/actions";
-import { CloseButtonDefault } from "./closebutton";
 import { Note } from "@/redux/state.interface";
+import { IconX } from "@tabler/icons-react";
 
 interface Props {
   index: number,
@@ -37,7 +37,13 @@ export function NoteEdit({index, currentNote}: Props) {
         variant='filledGray'
         onBlur={e => handleSetNoteContent(e)} 
       />
-      <CloseButtonDefault onClick={handleRemoveNote} />
+      <IconButton
+        aria-label='close'
+        variant='close'
+        size='xs'
+        onClick={handleRemoveNote}
+        icon={<IconX size='16px' strokeWidth='3' />}
+      />
     </HStack>
   );
 }
