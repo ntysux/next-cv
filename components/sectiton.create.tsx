@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import SectionMenuActions from "./section.menu-options";
 import { mergeSectionCreate, cancelSection } from "@/redux/actions";
 import { RootState } from "@/redux/store";
-import LayoutEdit from "./layout.edit";
+import DisplayDataEdit from "./display-data.edit";
 
 export default function SectionCreate() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -86,7 +86,7 @@ export default function SectionCreate() {
                 </Center> 
               : 
                 <Box minH='50vh'>
-                  <LayoutEdit />
+                  <DisplayDataEdit />
                 </Box>
             }
           </ModalBody>
