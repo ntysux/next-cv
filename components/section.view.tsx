@@ -1,13 +1,17 @@
-import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, Center, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Tag, Text, useDisclosure } from "@chakra-ui/react";
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, Center, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Tag, Text, useDisclosure } from "@chakra-ui/react";
 import { IconX } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SectionMenuActions from "./section.menu-options";
-import { Layout } from "@/redux/state.interface";
+import { DisplayData, DisplayDataType } from "@/redux/state.interface";
+import { NoteView } from "./display-data.note";
+import { ImageView } from "./display-data.image";
+import { BasicView } from "./display-data.basic";
+import { SimpleView } from "./display-data.simple";
 
 interface Map {
-  array: Layout[],
-  render: (item: Layout, key: number) => JSX.Element
+  array: DisplayData[],
+  render: (item: DisplayData, key: number) => JSX.Element
 }
 
 const Map = ({array, render}: Map) =>
@@ -39,22 +43,16 @@ export default function SectionView({index}: {index: number}) {
                 />
               </HStack>
               <AccordionPanel>
-                <Map array={section[index].chil} render={(item, key) => 
-                  <Box key={key}>
-                    {
-                      item.type === 'note' && <Tag bg='app.gray.dark'>Note here</Tag>
-                    }
-                    {
-                      item.type === 'image' && <Box>Image here</Box>
-                    }
-                    {
-                      item.type === 'basic' && <Box>basic here</Box>
-                    }
-                    {
-                      item.type === 'simple' && <Box>simple here</Box>
-                    }
-                  </Box>
-                } />
+                <Stack>
+                  <Map array={section[index].data} render={(item, key) => 
+                    <Box key={key}>
+                      {item.type === DisplayDataType.Note && <NoteView data={item} />}
+                      {item.type === DisplayDataType.Image && <ImageView data={item} />}
+                      {item.type === DisplayDataType.Basic && <BasicView data={item} />}
+                      {item.type === DisplayDataType.Simple && <SimpleView data={item} />}
+                    </Box>
+                  } />
+                </Stack>
               </AccordionPanel>
             </>
           )}
