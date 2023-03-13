@@ -21,6 +21,11 @@ export const mergeSectionCreate = (section: Section) => ({
   payload: {section}
 });
 
+export const mergeSectionUpdate = (index: number, section: Section) => ({
+  type: 'MERGE_SECTION_UPDATE',
+  payload: {index, section}
+});
+
 // for branch
 export const cancelSection = () => ({
   type: 'CANCEL_SECTION'
@@ -76,4 +81,9 @@ export const addSimpleSection = () => ({
 export const setSimpleContentSection = (index: number, currentSimple: Simple, content: string) => ({
   type: 'SET_SIMPLE_CONTENT_SECTION',
   payload: {index, currentSimple, content}
+});
+
+export const updateSection = (section: Section) => ({
+  type: 'UPDATE_SECTION',
+  payload: {section}
 });
