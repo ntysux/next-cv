@@ -1,6 +1,6 @@
-import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, Center, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Stack, Tag, Text, useDisclosure } from "@chakra-ui/react";
-import { IconX } from "@tabler/icons-react";
-import { useSelector } from "react-redux";
+import { Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button, Center, Flex, HStack, IconButton, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, ModalOverlay, SimpleGrid, Stack, Tag, Text, useDisclosure } from "@chakra-ui/react";
+import { IconEdit, IconX } from "@tabler/icons-react";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import SectionMenuActions from "./section.menu-options";
 import { DisplayData, DisplayDataType } from "@/redux/state.interface";
@@ -8,6 +8,8 @@ import { NoteView } from "./display-data.note";
 import { ImageView } from "./display-data.image";
 import { BasicView } from "./display-data.basic";
 import { SimpleView } from "./display-data.simple";
+import { cancelSection, mergeSectionUpdate, updateSection } from "@/redux/actions";
+import DisplayDataEdit from "./display-data.edit";
 
 interface Map {
   array: DisplayData[],
@@ -18,20 +20,38 @@ const Map = ({array, render}: Map) =>
   <>{array.map((item, key) => render(item, key))}</>
 
 export default function SectionView({index}: {index: number}) {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   // get current color, mode & section from redux state
   const { color, mode, section } = useSelector((state: RootState) => state.cv);
+  const sectionBranch = useSelector((state: RootState) => state.section);
+
+  const merge = () => {
+    onClose();
+    dispatch(mergeSectionUpdate(index, sectionBranch));
+    dispatch(cancelSection());
+  }
+
+  const cancel = () => {
+    onClose();
+    dispatch(cancelSection());
+  }
 
   return (
     <>
-      <Accordion defaultIndex={[0, 1]} allowMultiple>
+      <Accordion allowMultiple>
         <AccordionItem>
           {({ isExpanded }) => (
             <>
               <HStack>
                 <AccordionButton>{section[index].name}</AccordionButton>
                 <Box
-                  onClick={() => mode && onOpen()}
+                  onClick={() => {
+                    if(mode) {
+                      onOpen()
+                      dispatch(updateSection(section[index]))
+                    }
+                  }}
                   cursor={mode ? 'pointer' : 'default'}
                   p={mode ? 1 : 0.5}
                   border='2px'
@@ -59,41 +79,71 @@ export default function SectionView({index}: {index: number}) {
         </AccordionItem>
       </Accordion>
 
-      <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        scrollBehavior='inside'
+        closeOnOverlayClick={false}
+      >
         <ModalOverlay />
         <ModalContent maxW='container.lg'>
-          <ModalHeader>
-            <Center position='relative'>
+          <SimpleGrid
+            p={1}
+            columns={3}
+            roundedTop='2xl'
+            bg='app.black.dark'
+          >
+            <Box />
+            <Center>
               <HStack
-                bg='app.black.light'
                 p={1}
                 pl={3}
+                w='min'
                 rounded='full'
+                bg='app.black.light'
               >
-                <Text fontSize='sm' color='white'>{section[index].name}</Text>
+                <Text fontSize='sm' color='white' maxW='100px' noOfLines={1}>{sectionBranch.name}</Text>
                 <SectionMenuActions />
               </HStack>
+            </Center>
+            <Flex justify='right' align='center' pr={1}>
               <IconButton
-                position='absolute'
-                right='0'
-                onClick={onClose}
-                aria-label='close section'
-                variant='close'
-                icon={<IconX size='16px' strokeWidth='3' />}
+                aria-label='close dialog'
+                variant='closeDialog'
                 size='xs'
+                onClick={cancel}
+                icon={<IconX size='16px' strokeWidth='3' />}
               />
-            </Center>
-          </ModalHeader>
+            </Flex>
+          </SimpleGrid>
           <ModalBody>
-
+            {
+              sectionBranch.data.length === 0 ?
+                <Center minH='50vh' flexDirection='column' color='app.gray.light1'>
+                  <IconEdit size='24px' />
+                  <Text
+                    fontWeight='500'
+                    textAlign='center'
+                  >
+                    Các dạng dữ liệu hiển thị sẽ được trình bày tại đây.
+                  </Text>
+                </Center> 
+              : 
+                <Box minH='50vh'>
+                  <DisplayDataEdit />
+                </Box>
+            }
           </ModalBody>
-          <ModalFooter>
-            <Center w='full'>
-              <Button size='sm' onClick={onClose} variant='solidBlack' w='2xs'>
-                Lưu
-              </Button>
-            </Center>
-          </ModalFooter>
+          <Center p={2}>
+            <Button
+              onClick={merge}
+              variant='solidBlack'
+              size='sm'
+              w='2xs'
+            >
+              Lưu
+            </Button>
+          </Center>
         </ModalContent>
       </Modal>
     </>
