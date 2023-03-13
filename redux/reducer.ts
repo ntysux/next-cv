@@ -24,6 +24,15 @@ const mainReducer = (cv = initCv, action: Action): Cv => {
           action.payload.section
         ]
       };
+    case 'MERGE_SECTION_UPDATE':
+      return {
+        ...cv,
+        section: [
+          ...cv.section.slice(0, action.payload.index),
+          {...action.payload.section},
+          ...cv.section.slice(action.payload.index + 1)
+        ]
+      };
     default:
       return cv;
   }
