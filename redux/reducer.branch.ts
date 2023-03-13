@@ -114,6 +114,8 @@ const branchReducer = (section = initSection, action: Action): Section => {
           ...section.data.slice(action.payload.index + 1)
         ]
       };
+    case 'UPDATE_SECTION':
+      return {...action.payload.section}
     default:
       return section;
   }
