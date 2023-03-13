@@ -2,7 +2,7 @@ import { removeDataSection, setBasicContentSection, setBasicTitleSection } from 
 import { Basic } from "@/redux/state.interface";
 import { Box, Grid, GridItem, HStack, IconButton, Textarea } from "@chakra-ui/react";
 import { IconX } from "@tabler/icons-react";
-import { FocusEvent } from "react";
+import { FocusEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
 
 export function BasicEdit({currentBasic, index}: Props) {
   const dispatch = useDispatch();
+  const [basic, setBasic] = useState({title: currentBasic.title, content: currentBasic.content});
 
   // set title Basic
   const handleSetTitle = (event: FocusEvent) => {
@@ -31,16 +32,20 @@ export function BasicEdit({currentBasic, index}: Props) {
         <Box w='full'>
           <Grid templateColumns='repeat(3, 1fr)' gap={2}>
             <GridItem>
-              <Textarea 
+              <Textarea
+                value={basic.title}
                 variant='outlineGray'
                 fontWeight='600'
+                onChange={e => setBasic({...basic, title: e.target.value})}
                 onBlur={e => handleSetTitle(e)}
               />
             </GridItem>
             <GridItem colSpan={2}>
               <Textarea
+                value={basic.content}
                 variant='outlineGray'
                 minH='200px'
+                onChange={e => setBasic({...basic, content: e.target.value})}
                 onBlur={e => handleSetContent(e)}  
               />
             </GridItem>

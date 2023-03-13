@@ -2,7 +2,7 @@ import { removeDataSection, setSimpleContentSection } from "@/redux/actions";
 import { Simple } from "@/redux/state.interface";
 import { Box, HStack, IconButton, Text, Textarea } from "@chakra-ui/react";
 import { IconX } from "@tabler/icons-react";
-import { FocusEvent } from "react";
+import { FocusEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 
 interface Props {
@@ -12,6 +12,7 @@ interface Props {
 
 export function SimpleEdit({currentSimple, index}: Props) {
   const dispatch = useDispatch();
+  const [simpleContent, setSimpleContent] = useState(currentSimple.content);
 
   // set content Simple use redux state
   const handleSetSimpleContent = (event: FocusEvent) => {
@@ -26,6 +27,8 @@ export function SimpleEdit({currentSimple, index}: Props) {
     <>
       <HStack>
         <Textarea
+          value={simpleContent}
+          onChange={e => setSimpleContent(e.target.value)}
           variant='outlineGray'
           onBlur={e => handleSetSimpleContent(e)}
         />

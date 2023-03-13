@@ -1,6 +1,6 @@
 import { Box, HStack, IconButton, Textarea } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
-import { FocusEvent } from "react";
+import { FocusEvent, useState } from "react";
 import { removeDataSection, setNoteContentSection } from "@/redux/actions";
 import { Note } from "@/redux/state.interface";
 import { IconX } from "@tabler/icons-react";
@@ -21,6 +21,7 @@ const Map = ({array, render}: Map) => <>{array?.map((line, index) => render(line
 // Note edit
 export function NoteEdit({index, currentNote}: Props) {
   const dispatch = useDispatch();
+  const [noteContent, setNoteContent] = useState(currentNote.content);
 
   // set note content
   const handleSetNoteContent = (event: FocusEvent) => {
@@ -34,6 +35,8 @@ export function NoteEdit({index, currentNote}: Props) {
   return (
     <HStack>
       <Textarea
+        value={noteContent}
+        onChange={e => setNoteContent(e.target.value)}
         variant='filledGray'
         onBlur={e => handleSetNoteContent(e)} 
       />
