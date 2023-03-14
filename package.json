@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@notionhq/client": "^2.2.3",
     "@reduxjs/toolkit": "^1.9.3",
     "@tabler/icons-react": "^2.6.0",
     "@types/node": "18.14.2",
