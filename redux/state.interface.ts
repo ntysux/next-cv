@@ -35,6 +35,7 @@ export interface Section {
 }
 
 export interface Cv {
+  id: string,
   name: string,
   color: string,
   mode: boolean,
